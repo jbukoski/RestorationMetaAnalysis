@@ -2,7 +2,7 @@
 
 ## R  
 
-* [Cation Exchange Capacity](https://github.com/FelipeSBarros/RestorationMetaAnalysis/R/Calculating_SoilCEC.R)  
+* [Cation Exchange Capacity](https://github.com/FelipeSBarros/RestorationMetaAnalysis/blob/master/R/Calculating_SoilCEC.R)  
 
 ## References  
 
