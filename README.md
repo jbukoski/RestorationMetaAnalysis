@@ -11,5 +11,5 @@
 # Analysis Validation  
 
 To certify all analysis have been done correctly, a random study site was selected to run same analysis using R stats.
-For esults, [click here[(https://felipesbarros.github.io/RestorationMetaAnalysis/R/AnalysisValidation.html)  
+For esults, [click here](https://felipesbarros.github.io/RestorationMetaAnalysis/R/AnalysisValidation.html)  
 
