@@ -4,9 +4,9 @@
 
 **General information:**  
 
-[X] [Analysis validation](# Analysis Validation): Reproduce the same analysis done in Google Earth Engine on R to check the if results match;  
-[X] [First Round Analysis](# First Round Analysis): extract dataset values for different buffer sizes around study areas;  
-[ ] [Second Round Analysis](): as first round was done missing few datasets, the second round should be the final one and with all layers expected;  
+ [X] [Analysis validation](# Analysis Validation): Reproduce the same analysis done in Google Earth Engine on R to check the if results match;  
+ [X] [First Round Analysis](# First Round Analysis): extract dataset values for different buffer sizes around study areas;  
+ [ ] [Second Round Analysis](): as first round was done missing few datasets, the second round should be the final one and with all layers expected;  
 
 # Analysis Validation  
 
@@ -41,11 +41,11 @@ The dataset were composed by:
 [Link to GEE analysis script](https://code.earthengine.google.com/6a978e79a1acb1cd2fb9a3e53a0ea456)
 
 ### 1st Round Results  
-:arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer5.csv)  
-:arrow_double_down: [Buffer 10Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer10.csv)  
-:arrow_double_down: [Buffer 25Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer25.csv)  
-:arrow_double_down: [Buffer 50Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer50.csv)  
-:arrow_double_down: [Buffer 100Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer100.csv)  
+ :arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer5.csv)  
+ :arrow_double_down: [Buffer 10Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer10.csv)  
+ :arrow_double_down: [Buffer 25Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer25.csv)  
+ :arrow_double_down: [Buffer 50Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer50.csv)  
+ :arrow_double_down: [Buffer 100Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer100.csv)  
 
 # Scripts  
 
