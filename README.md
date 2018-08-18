@@ -1,4 +1,6 @@
-# Repository created to host all scripts used in Socio Economic and Econological Restoration Meta Analysis
+# Socio Economic and Ecological Restoration Meta Analysis Project
+
+### Repository created to host all scripts used in Socio Economic and Ecological Restoration Meta Analysis
 
 **General information:**  
 
@@ -30,7 +32,7 @@ The dataset were composed by:
   * Driest Quarter (*bio 17*)
   * Precipitation Seasonality (*bio 15*)
 * [Soil Grid](https://soilgrids.org/)  
-  * Cation Exchange (see [cec](s))
+  * Cation Exchange (see [cec](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0169748))
 * Opportunity Cost  
   * Created by
 * [ESA Globe Cover](http://due.esrin.esa.int/page_globcover.php)  
@@ -56,4 +58,4 @@ The dataset were composed by:
 
 * **Cation Exchange Capacity:** [Hengl et al. 2017](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0169748)  
 * **Urban Area:** [ESA global LC maps at 300 m spatial resolution on an annual basis from 1992 to 2015;](http://maps.elie.ucl.ac.be/CCI/viewer/download.php)  
-[User guide](http://maps.elie.ucl.ac.be/CCI/viewer/download/ESACCI-LC-QuickUserGuide-LC-Maps_v2-0-7.pdf)  
+  * [User guide](http://maps.elie.ucl.ac.be/CCI/viewer/download/ESACCI-LC-QuickUserGuide-LC-Maps_v2-0-7.pdf)  
