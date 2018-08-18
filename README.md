@@ -4,9 +4,9 @@
 
 **General information:**  
 
- [X] [Analysis validation](https://github.com/FelipeSBarros/RestorationMetaAnalysis#analysis-validation): Reproduce the same analysis done in Google Earth Engine on R to check the if results match;  
- [X] [First Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#First-Round-Analysis): extract dataset values for different buffer sizes around study areas;  
- [ ] [Second Round Analysis](): as first round was done missing few datasets, the second round should be the final one and with all layers expected;  
+ - [X] [Analysis validation](https://github.com/FelipeSBarros/RestorationMetaAnalysis#analysis-validation): Reproduce the same analysis done in Google Earth Engine on R to check the if results match;  
+ - [X] [First Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#First-Round-Analysis): extract dataset values for different buffer sizes around study areas;  
+ - [ ] [Second Round Analysis](): as first round was done missing few datasets, the second round should be the final one and with all layers expected;  
 
 # Analysis Validation  
 
