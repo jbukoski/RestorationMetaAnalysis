@@ -1,0 +1,42 @@
+---
+title: "AnalysisValidation"
+author: "Felipe Sodré Mendes Barros"
+date: "August 8, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+library(rgdal)
+library(raster)
+library(pander)
+library(mapview)
+```
+
+# Analysis Validation
+
+To validate de analysis done with Google Earth Engine, a random study site was selected to have the statistics estimated and compared using R. The buffer was done with a hypotetical 10km radii;
+
+## Study site
+
+```{r buffer}
+buffer <- readOGR("../Data/Buffer_validation.geojson", "Buffer_validation")
+mapview(buffer, axes=TRUE, map.types = mapviewGetOption("basemaps")[3])
+```
+
+## Results from GEE
+```{r GEEstats}
+# reading stats taken from Google Earth Engine
+GEEstats <- read.csv("../Data/CECstats.csv")[,c(2,3)]
+GEEstats$SudySite <- "Site 269"
+GEEstats <- GEEstats[,c(3,1,2)]
+pander(GEEstats)
+```
+
+## Results from R
+```{r Rstats}
+# reading stats taken from R
+Rstats <- read.csv("./CEC_Rstats.csv")
+
+pander(Rstats)
+```

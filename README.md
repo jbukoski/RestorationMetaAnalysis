@@ -6,7 +6,7 @@
 
  - [X] [Analysis validation](https://github.com/FelipeSBarros/RestorationMetaAnalysis#analysis-validation): Reproduce the same analysis done in Google Earth Engine on R to check the if results match;  
  - [X] [First Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#First-Round-Analysis): extract dataset values for different buffer sizes around study areas;  
- - [ ] [Second Round Analysis](): as first round was done missing few datasets, the second round should be the final one and with all layers expected;  
+ - [X] [Second Round Analysis](): as first round was done missing few datasets, the second round should be the final one and with all layers expected;  
 
 # Analysis Validation  
 
@@ -47,12 +47,35 @@ The dataset were composed by:
  :arrow_double_down: [Buffer 50Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer50.csv)  
  :arrow_double_down: [Buffer 100Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer100.csv)  
 
+ # Second Round Analysis
+
+ where added to the analysis the variables:
+
+ * [Human Foot Print](http://sedac.ciesin.columbia.edu/data/set/wildareas-v2-human-footprint-geographic)  
+   * 1995 - 2004
+ * [Urban Area - ESA Globe Cover](http://due.esrin.esa.int/page_globcover.php)  
+   * 2009  
+ * [Rural poverty distribution](http://www.ciesin.columbia.edu/povmap/ds_global.html)  
+   *  
+ * [ Rural population distribution (persons per pixel), 2000 (FGGD)](http://www.worldclim.org/version1)  
+   * 2007  
+
+ [Link to GEE analysis script](https://code.earthengine.google.com/73c27acb4c39cc3fa00ccfe8d3de5170)
+
+ ### 2nd Round Results  
+  :arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer5.csv)  
+  :arrow_double_down: [Buffer 10Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer10.csv)  
+  :arrow_double_down: [Buffer 25Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer25.csv)  
+  :arrow_double_down: [Buffer 50Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer50.csv)  
+  :arrow_double_down: [Buffer 100Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer100.csv)  
+
 # Scripts  
 
 ## R  
 
 * [Cation Exchange Capacity](https://github.com/FelipeSBarros/RestorationMetaAnalysis/blob/master/R/Calculating_SoilCEC.R)  
-* [1st round data organization](https://github.com/FelipeSBarros/RestorationMetaAnalysis/blob/master/R/Organizing1stRoundSats)  
+* [1st round data organization](https://github.com/FelipeSBarros/RestorationMetaAnalysis/blob/master/R/Organizing1stRoundSats.R)  
+* [2nd round data organization](https://github.com/FelipeSBarros/RestorationMetaAnalysis/blob/master/R/Organizing2ndRoundSats.R)  
 
 # References  
 
