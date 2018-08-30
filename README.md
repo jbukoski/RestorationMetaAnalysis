@@ -1,4 +1,4 @@
-# Socio Economic and Ecological Restoration Meta Analysis Project
+Economic and Ecological Restoration Meta Analysis Project
 
 ### Repository created to host all scripts used in Socio Economic and Ecological Restoration Meta Analysis
 
@@ -60,7 +60,7 @@ The dataset were composed by:
  * [ Rural population distribution (persons per pixel), 2000 (FGGD)](http://www.worldclim.org/version1)  
    * 2007  
  * [ Hansen tree cover](http://earthenginepartners.appspot.com/science-2013-global-forest)  
-   * 2000 - 2003
+   * 2003
    * 2000 - 2010
 
  [Link to GEE analysis script](https://code.earthengine.google.com/34a4597de9280d8a33df9776a7aa7daa)
