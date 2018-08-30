@@ -11,7 +11,7 @@
 # Analysis Validation  
 
 To certify all analysis have been done correctly, a random study site was selected to run same analysis using R stats.
-For esults, [click here](https://felipesbarros.github.io/RestorationMetaAnalysis/R/AnalysisValidation.html)  
+For results, [click here](https://felipesbarros.github.io/RestorationMetaAnalysis/R/AnalysisValidation.html)  
 
 # First Round Analysis
 
@@ -56,11 +56,14 @@ The dataset were composed by:
  * [Urban Area - ESA Globe Cover](http://due.esrin.esa.int/page_globcover.php)  
    * 2009  
  * [Rural poverty distribution](http://www.ciesin.columbia.edu/povmap/ds_global.html)  
-   *  
+   *  ..
  * [ Rural population distribution (persons per pixel), 2000 (FGGD)](http://www.worldclim.org/version1)  
    * 2007  
+ * [ Hansen tree cover](http://earthenginepartners.appspot.com/science-2013-global-forest)  
+   * 2000 - 2003
+   * 2000 - 2010
 
- [Link to GEE analysis script](https://code.earthengine.google.com/73c27acb4c39cc3fa00ccfe8d3de5170)
+ [Link to GEE analysis script](https://code.earthengine.google.com/34a4597de9280d8a33df9776a7aa7daa)
 
  ### 2nd Round Results  
   :arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer5.csv)  
