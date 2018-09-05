@@ -62,8 +62,16 @@ The dataset were composed by:
  * [ Hansen tree cover](http://earthenginepartners.appspot.com/science-2013-global-forest)  
    * 2003
    * 2000 - 2010
+ * [ Global Roads Inventory Project - GRIP - version 4](https://doi.org/10.1088/1748-9326/aabd42)  
+    * density for all roads, equally weighted
+    * density for GRIP type 1 - highways
+    * density for GRIP type 2 - primary roads
+    * density for GRIP type 3 - secondary roads
+    * density for GRIP type 4 - tertiary roads
+    * density for GRIP type 5 - local roads
 
- [Link to GEE analysis script](https://code.earthengine.google.com/34a4597de9280d8a33df9776a7aa7daa)
+
+ [Link to GEE analysis script](https://code.earthengine.google.com/655b906867ba3825297fd6fe2f4a5f6f)
 
  ### 2nd Round Results  
   :arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer5.csv)  
@@ -85,3 +93,4 @@ The dataset were composed by:
 * **Cation Exchange Capacity:** [Hengl et al. 2017](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0169748)  
 * **Urban Area:** [ESA global LC maps at 300 m spatial resolution on an annual basis from 1992 to 2015;](http://maps.elie.ucl.ac.be/CCI/viewer/download.php)  
   * [User guide](http://maps.elie.ucl.ac.be/CCI/viewer/download/ESACCI-LC-QuickUserGuide-LC-Maps_v2-0-7.pdf)  
+* **Global Road Density Rasters::** [Meijer et al 2018 Environ. Res. Lett](https://doi.org/10.1088/1748-9326/aabd42)  
