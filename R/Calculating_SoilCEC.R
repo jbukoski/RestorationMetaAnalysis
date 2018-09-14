@@ -13,3 +13,40 @@ overlay(s1, s2, s3, s4, fun = function(a, b, c, d){(1/(30*2)*((5-0)*(a+b)+(15-5)
 rfinal <- raster("../soil_CEC_30cm_1km.tif")
 
 plot(rfinal, maxpixels = 5000)
+
+
+## PH
+PHStack <- stack(
+  list.files("/media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/SoilGrid/", pattern = 'PHIKCL', full.names = TRUE))
+overlay(PHStack, fun = function(a, b, c, d){(1/(30*2)*((5-0)*(a+b)+(15-5)*(b+c)+(30-15)*(c+d)))}, filename = "../Data/soil_PHIKCL_30cm_1km", format = "GTiff", overwrite = TRUE)
+
+phfinal <- raster("../Data/soil_PHIKCL_30cm_1km.tif")
+
+plot(phfinal, maxpixels = 5000)
+
+## PH 2
+PHStack <- stack(
+  list.files("/media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/SoilGrid/", pattern = 'PHIHOX', full.names = TRUE))
+overlay(PHStack, fun = function(a, b, c, d){(1/(30*2)*((5-0)*(a+b)+(15-5)*(b+c)+(30-15)*(c+d)))}, filename = "../Data/soil_PHIHOX_30cm_1km", format = "GTiff", overwrite = TRUE)
+
+phfinal <- raster("../Data/soil_PHIHOX_30cm_1km.tif")
+
+plot(phfinal, maxpixels = 5000)
+
+## Sand ppt
+PHStack <- stack(
+  list.files("/media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/SoilGrid/", pattern = 'SNDPPT', full.names = TRUE))
+overlay(PHStack, fun = function(a, b, c, d){(1/(30*2)*((5-0)*(a+b)+(15-5)*(b+c)+(30-15)*(c+d)))}, filename = "../Data/soil_SNDPPT_30cm_1km", format = "GTiff", overwrite = TRUE)
+
+phfinal <- raster("../Data/soil_SNDPPT_30cm_1km.tif")
+
+plot(phfinal, maxpixels = 5000)
+
+## Bulk Density
+PHStack <- stack(
+  list.files("/media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/SoilGrid/", pattern = 'BLDFIE', full.names = TRUE))
+overlay(PHStack, fun = function(a, b, c, d){(1/(30*2)*((5-0)*(a+b)+(15-5)*(b+c)+(30-15)*(c+d)))}, filename = "../Data/soil_BLDFIE_30cm_1km", format = "GTiff", overwrite = TRUE)
+
+phfinal <- raster("../Data/soil_BLDFIE_30cm_1km.tif")
+
+plot(phfinal, maxpixels = 5000)

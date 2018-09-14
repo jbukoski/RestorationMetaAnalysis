@@ -6,7 +6,7 @@ Economic and Ecological Restoration Meta Analysis Project
 
  - [X] [Analysis validation](https://github.com/FelipeSBarros/RestorationMetaAnalysis#analysis-validation): Reproduce the same analysis done in Google Earth Engine on R to check the if results match;  
  - [X] [First Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#First-Round-Analysis): extract dataset values for different buffer sizes around study areas;  
- - [X] [Second Round Analysis](): as first round was done missing few datasets, the second round should be the final one and with all layers expected;  
+ - [X] [Second Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Second-Round-Analysis): as first round was done missing few datasets, the second round should be the final one and with all layers expected;  
 
 # Analysis Validation  
 
@@ -19,26 +19,26 @@ The statistics used for Ecological data where *mean* (\*_mean) and *standard dev
 The dataset were composed by:
 
 * [Net Primary Production](http://dx.doi.org/10.5067/MODIS/MOD17A3H.006)  
-  * 2000 - 2010
-  * 2003
+  * **NPP0010** =  2000 - 2010
+  * **NPP03** = 2003
 * [Water Deficit](https://www.nature.com/articles/sdata2017191)  
-  * 1989 - 2010
-  * 2003
-  * 1999
+  * **WDeficit8910** = 1989 - 2010
+  * **WDeficit03** = 2003
+  * **WDeficit99** = 1999
 * [Hansen v:1.5](http://earthenginepartners.appspot.com/science-2013-global-forest)
-  * Tree Cover Density year 2000  
+  * **treecover2000** = Tree Cover Density year 2000  
 * [World Clim](http://www.worldclim.org/version1)  
-  * Mean Precipitation
-  * Driest Quarter (*bio 17*)
-  * Precipitation Seasonality (*bio 15*)
+  * **YrlPrec** = Mean Precipitation
+  * **DriestQuartes** = Driest Quarter (*bio 17*)
+  * **PrecSeanslty** = Precipitation Seasonality (*bio 15*)
 * [Soil Grid](https://soilgrids.org/)  
-  * Cation Exchange (see [cec](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0169748))
+  * **CEC** = Cation Exchange (see [cec](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0169748))
 * Opportunity Cost  
-  * Created by
+  * **OppCost** = Created by
 * [ESA Globe Cover](http://due.esrin.esa.int/page_globcover.php)  
   * Urban Areas 2009
 
-[Link to GEE analysis script](https://code.earthengine.google.com/6a978e79a1acb1cd2fb9a3e53a0ea456)
+[Link to GEE analysis script](https://code.earthengine.google.com/d180ea0cdd8d61de0880a2ef0a297422)
 
 ### 1st Round Results  
  :arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer5.csv)  
@@ -52,26 +52,27 @@ The dataset were composed by:
  where added to the analysis the variables:
 
  * [Human Foot Print](http://sedac.ciesin.columbia.edu/data/set/wildareas-v2-human-footprint-geographic)  
-   * 1995 - 2004
+  * **HFPrint** = 1995 - 2004
  * [Urban Area - ESA Globe Cover](http://due.esrin.esa.int/page_globcover.php)  
-   * 2009  
+  * **PercUrbArea** = 2009  
  * [Rural poverty distribution](http://www.ciesin.columbia.edu/povmap/ds_global.html)  
-   *  ..
+  *   **RuralPvty** = ?  
+  *This layer had its pixels with negative values (e.g. -998) reclasifyed to 0 as it seems to be indicating nodata areas = Urban Area*;
  * [ Rural population distribution (persons per pixel), 2000 (FGGD)](http://www.worldclim.org/version1)  
-   * 2007  
+  * **RuralPop** = 2007  
  * [ Hansen tree cover](http://earthenginepartners.appspot.com/science-2013-global-forest)  
-   * 2003
-   * 2000 - 2010
+  * **f2003** = 2003
+  * **ForestUntl10** = 2000 - 2010
  * [ Global Roads Inventory Project - GRIP - version 4](https://doi.org/10.1088/1748-9326/aabd42)  
-    * density for all roads, equally weighted
-    * density for GRIP type 1 - highways
-    * density for GRIP type 2 - primary roads
-    * density for GRIP type 3 - secondary roads
-    * density for GRIP type 4 - tertiary roads
-    * density for GRIP type 5 - local roads
+  * **TotalRoadDensity** = density for all roads, equally weighted
+  * **T1RoadDensity** = density for GRIP type 1 - highways
+  * **T2RoadDensity** = density for GRIP type 2 - primary roads
+  * **T3RoadDensity** = density for GRIP type 3 - secondary roads
+  * **T4RoadDensity** = density for GRIP type 4 - tertiary roads
+  * **T5RoadDensity** = density for GRIP type 5 - local roads
 
 
- [Link to GEE analysis script](https://code.earthengine.google.com/655b906867ba3825297fd6fe2f4a5f6f)
+ [Link to GEE analysis script](https://code.earthengine.google.com/d180ea0cdd8d61de0880a2ef0a297422)
 
  ### 2nd Round Results  
   :arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer5.csv)  
