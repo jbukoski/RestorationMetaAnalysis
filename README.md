@@ -69,7 +69,7 @@ The dataset were composed by:
     * **T2RoadDensity** = density for GRIP type 2 - primary roads  
     * **T3RoadDensity** = density for GRIP type 3 - secondary roads  
     * **T4RoadDensity** = density for GRIP type 4 - tertiary roads  
-  * **T5RoadDensity** = density for GRIP type 5 - local roads  
+    * **T5RoadDensity** = density for GRIP type 5 - local roads  
 
 
  [Link to GEE analysis script](https://code.earthengine.google.com/d180ea0cdd8d61de0880a2ef0a297422)
