@@ -52,24 +52,24 @@ The dataset were composed by:
  where added to the analysis the variables:
 
  * [Human Foot Print](http://sedac.ciesin.columbia.edu/data/set/wildareas-v2-human-footprint-geographic)  
-  * **HFPrint** = 1995 - 2004
+    * **HFPrint** = 1995 - 2004
  * [Urban Area - ESA Globe Cover](http://due.esrin.esa.int/page_globcover.php)  
-  * **PercUrbArea** = 2009  
+    * **PercUrbArea** = 2009  
  * [Rural poverty distribution](http://www.ciesin.columbia.edu/povmap/ds_global.html)  
-  *   **RuralPvty** = ?  
+    *   **RuralPvty** = ?  
   *This layer had its pixels with negative values (e.g. -998) reclasifyed to 0 as it seems to be indicating nodata areas = Urban Area*;
  * [ Rural population distribution (persons per pixel), 2000 (FGGD)](http://www.worldclim.org/version1)  
-  * **RuralPop** = 2007  
+    * **RuralPop** = 2007  
  * [ Hansen tree cover](http://earthenginepartners.appspot.com/science-2013-global-forest)  
-  * **f2003** = 2003
-  * **ForestUntl10** = 2000 - 2010
+    * **f2003** = 2003
+    * **ForestUntl10** = 2000 - 2010
  * [ Global Roads Inventory Project - GRIP - version 4](https://doi.org/10.1088/1748-9326/aabd42)  
-  * **TotalRoadDensity** = density for all roads, equally weighted
-  * **T1RoadDensity** = density for GRIP type 1 - highways
-  * **T2RoadDensity** = density for GRIP type 2 - primary roads
-  * **T3RoadDensity** = density for GRIP type 3 - secondary roads
-  * **T4RoadDensity** = density for GRIP type 4 - tertiary roads
-  * **T5RoadDensity** = density for GRIP type 5 - local roads
+    * **TotalRoadDensity** = density for all roads, equally weighted  
+    * **T1RoadDensity** = density for GRIP type 1 - highways  
+    * **T2RoadDensity** = density for GRIP type 2 - primary roads  
+    * **T3RoadDensity** = density for GRIP type 3 - secondary roads  
+    * **T4RoadDensity** = density for GRIP type 4 - tertiary roads  
+  * **T5RoadDensity** = density for GRIP type 5 - local roads  
 
 
  [Link to GEE analysis script](https://code.earthengine.google.com/d180ea0cdd8d61de0880a2ef0a297422)
