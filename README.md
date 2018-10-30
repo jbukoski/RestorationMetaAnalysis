@@ -95,9 +95,9 @@ The dataset were composed by:
     * **Shifting Agriculture: sa** =  Perc Argriculture driven deforestation  
     * **Forestry: fty** =  Perc Forestry driven deforestation  
     * **Wildfire: wfire** = Perc Wildfire driven deforestation  
-    * **Urbanization: ubr** = Perc Urban driven deforestation  
+    * **Urbanization: urb** = Perc Urban driven deforestation  
 
- [Link to GEE analysis script](https://code.earthengine.google.com/bb28427f64e56c5a38e7188104a693a1)
+ [Link to GEE analysis script](https://code.earthengine.google.com/7c7625b76428269c24c5f00c919f8473)
 
  ### 2nd Round Results  
   :arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer5.csv)  
