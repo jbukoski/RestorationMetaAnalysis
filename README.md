@@ -90,8 +90,14 @@ The dataset were composed by:
     * **Elevation** = mean elevation in meters;
 * [Slope](https://developers.google.com/earth-engine/api_docs#eeterrainslope)  
     * **Slope** = mean slope in degrees  
+* [Curtis et al. (**Commodities**)](http://science.sciencemag.org/content/suppl/2018/09/12/361.6407.1108.DC1)  
+    * **Commodity-driven Deforestation: cdd** = Perc Commidity driven deforestation  
+    * **Shifting Agriculture: sa** =  Perc Argriculture driven deforestation  
+    * **Forestry: fty** =  Perc Forestry driven deforestation  
+    * **Wildfire: wfire** = Perc Wildfire driven deforestation  
+    * **Urbanization: ubr** = Perc Urban driven deforestation  
 
- [Link to GEE analysis script](https://code.earthengine.google.com/aa976a084530f4a831375454dea71873)
+ [Link to GEE analysis script](https://code.earthengine.google.com/bb28427f64e56c5a38e7188104a693a1)
 
  ### 2nd Round Results  
   :arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer5.csv)  
