@@ -6,7 +6,7 @@ Economic and Ecological Restoration Meta Analysis Project
 
  - [X] [Analysis validation](https://github.com/FelipeSBarros/RestorationMetaAnalysis#analysis-validation): Reproduce the same analysis done in Google Earth Engine on R to check the if results match;  
  - [X] [First Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#First-Round-Analysis): extract dataset values for different buffer sizes around study areas;  
- - [X] [Second Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Second-Round-Analysis): as first round was done missing few datasets, the second round should be the final one and with all layers expected;  
+ - [X] [Second Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Second-Round-Analysis): as first round was done missing few datasets, the second round should be the final one and with all layers expected; :warning: **Updated on 29/10//2018**  
 
 # Analysis Validation  
 
@@ -71,8 +71,27 @@ The dataset were composed by:
     * **T4RoadDensity** = density for GRIP type 4 - tertiary roads  
     * **T5RoadDensity** = density for GRIP type 5 - local roads  
 
+## Workshop updates (29/10/2018)  
+* [IDH](https://datadryad.org/resource/doi:10.5061/dryad.dk1j0)  
+   * **IDH03** = IDH value for 2003
+   * **IDH9017** = mean IDH value between 1990 - 2017  
+* Normalized Burn Ratio  
+#GEE - LANDSAT/LC8_L1T_ANNUAL_NBRT  
+    * **NBR1317** = mean NBR value between 2013 - 2017
+* Burn Area Index  
+#GEE - LANDSAT/LC8_L1T_ANNUAL_BAI  
+    * **BAI1317** = mean BAI value between 2013 - 2017  
+* [CropLands](https://geography.wr.usgs.gov/science/croplands/
+)  
+    * **CropLands** = Percentage of cropland;
+* [Croplands & Pastures](http://sedac.ciesin.columbia.edu/data/set/aglands-pastures-2000)  
+    * **PastAgric** = Percentage of cropland OR agriculture;
+* [Elevation SRTM 30m](https://lpdaac.usgs.gov/sites/default/files/public/measures/docs/SRTM%20Quick%20Guide.pdf)  
+    * **Elevation** = mean elevation in meters;
+* [Slope](https://developers.google.com/earth-engine/api_docs#eeterrainslope)  
+    * **Slope** = mean slope in degrees  
 
- [Link to GEE analysis script](https://code.earthengine.google.com/d180ea0cdd8d61de0880a2ef0a297422)
+ [Link to GEE analysis script](https://code.earthengine.google.com/aa976a084530f4a831375454dea71873)
 
  ### 2nd Round Results  
   :arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer5.csv)  
