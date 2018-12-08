@@ -6,7 +6,8 @@ Economic and Ecological Restoration Meta Analysis Project
 
  - [X] [Analysis validation](https://github.com/FelipeSBarros/RestorationMetaAnalysis#analysis-validation): Reproduce the same analysis done in Google Earth Engine on R to check the if results match;  
  - [X] [First Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#First-Round-Analysis): extract dataset values for different buffer sizes around study areas;  
- - [X] [Second Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Second-Round-Analysis): as first round was done missing few datasets, the second round should be the final one and with all layers expected; :warning: **Updated on 29/10//2018**  
+ - [X] [Second Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Second-Round-Analysis): as first round was done missing few datasets, the second round should be the final one and with all layers expected;
+ - [X] [Workshop update](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Workshop-updates): After second round, an update was done adding more layers considering workshop commets by specialists. :warning: **Updated on 08/12/2018**  
 
 # Analysis Validation  
 
@@ -58,7 +59,7 @@ The dataset were composed by:
  * [Rural poverty distribution](http://www.ciesin.columbia.edu/povmap/ds_global.html)  
     *   **RuralPvty** = ?  
   *This layer had its pixels with negative values (e.g. -998) reclasifyed to 0 as it seems to be indicating nodata areas = Urban Area*;
- * [ Rural population distribution (persons per pixel), 2000 (FGGD)](http://www.worldclim.org/version1)  
+ * [ Rural population distribution (persons per pixel), 2000 (FGGD)](http://www.fao.org:80/geonetwork/srv/en/resources.get?id=14031&fname=Map_2_1.zip&access=private)  
     * **RuralPop** = 2007  
  * [ Hansen tree cover](http://earthenginepartners.appspot.com/science-2013-global-forest)  
     * **f2003** = 2003
@@ -71,7 +72,8 @@ The dataset were composed by:
     * **T4RoadDensity** = density for GRIP type 4 - tertiary roads  
     * **T5RoadDensity** = density for GRIP type 5 - local roads  
 
-## Workshop updates (29/10/2018)  
+# Workshop updates  
+Wokshop hel in Rio de JAneiro - IIS on 29/10/2018  
 * [IDH](https://datadryad.org/resource/doi:10.5061/dryad.dk1j0)  
    * **IDH03** = IDH value for 2003
    * **IDH9017** = mean IDH value between 1990 - 2017  
@@ -96,10 +98,36 @@ The dataset were composed by:
     * **Forestry: fty** =  Perc Forestry driven deforestation  
     * **Wildfire: wfire** = Perc Wildfire driven deforestation  
     * **Urbanization: urb** = Perc Urban driven deforestation  
+* **IIS Opportunity cost**  
+    * OpCostIISmasked  
+    * OpCostIIS  
+* **IIS Landuse**  
+    * cropIIS  
+    * pastoIIS  
+    * croppastureIIS  
+* [Governance](www.govindicators.org)
+    * govrnce = governance  
+    Government Effectiveness captures perceptions of the quality of public services, the quality of the civil service and the degree of its independence from political pressures, the quality of policy formulation and implementation, and the credibility of the government's commitment to such policies
+* [Migration]  
+    * deltaGHSL9015:  Migration estimated from [GHSL: Global Human Settlement Layers](http://ghsl.jrc.ec.europa.eu/ghs_pop.php)   
+    * deltaGPWCount0010: [GPWv4: Population Count](https://doi.org/10.7927/H4X63JVC)  
+    * deltaGPWDensity0010: Migration estimated from [GPWv4: Population Density](https://doi.org/10.7927/H4NP22DQ)  
+* [WDPA: World Database on Protected Areas](http://pp-import-production.s3.amazonaws.com/WDPA_Manual_1_5.pdf):  
+    * strictlyPA: Strictly Protected Areas  
+    * SustainablePA: Sustainable Protected Areas  
+* Gross Deforestation (Hansen based)  
+    * GrossDef: Total deforested until 2010  
+* Mean Temperature [World Clim](http://www.worldclim.org/version1)  
+    * AnualTemp: Anual mean temperature  
+* [Soil Data](https://soilgrids.org/)  
+    * bldfie = bulkdensity  
+    * phihox = phihox  
+    * phikcl  
+    * sndppt: Sand   
+*  
+ [Link to GEE analysis script](https://code.earthengine.google.com/0683ddcf65c09c9d123f5f88f826f9ee)
 
- [Link to GEE analysis script](https://code.earthengine.google.com/7c7625b76428269c24c5f00c919f8473)
-
- ### 2nd Round Results  
+ ### 2nd Round [workshop] Results  
   :arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer5.csv)  
   :arrow_double_down: [Buffer 10Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer10.csv)  
   :arrow_double_down: [Buffer 25Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer25.csv)  
@@ -120,3 +148,9 @@ The dataset were composed by:
 * **Urban Area:** [ESA global LC maps at 300 m spatial resolution on an annual basis from 1992 to 2015;](http://maps.elie.ucl.ac.be/CCI/viewer/download.php)  
   * [User guide](http://maps.elie.ucl.ac.be/CCI/viewer/download/ESACCI-LC-QuickUserGuide-LC-Maps_v2-0-7.pdf)  
 * **Global Road Density Rasters::** [Meijer et al 2018 Environ. Res. Lett](https://doi.org/10.1088/1748-9326/aabd42)  
+* **"The Worldwide Governance Indicators:  Methodology and Analytical Issues"**.  World Bank Policy Research Working Paper No. 5430 (http://papers.ssrn.com/sol3/papers.cfm?abstract_id=1682130).  The WGI do not reflect the official views of the Natural Resource Governance Institute, the Brookings Institution, the World Bank, its Executive Directors, or the countries they represent."  
+* Center for International Earth Science Information Network - CIESIN - Columbia University. 2016. **Gridded Population of the World, Version 4 (GPWv4): Population Density**. Palisades, NY: NASA Socioeconomic Data and Applications Center (SEDAC). https://doi.org/10.7927/H4NP22DQ. Accessed DAY MONTH YEAR.  
+* Center for International Earth Science Information Network - CIESIN - Columbia University. 2016. **Gridded Population of the World, Version 4 (GPWv4): Population Count**. Palisades, NY: NASA Socioeconomic Data and Applications Center (SEDAC). https://doi.org/10.7927/H4X63JVC. Accessed DAY MONTH YEAR.  
+* European Commission, Joint Research Centre (JRC); Columbia University, Center for International Earth Science Information Network - CIESIN (2015): **GHS population grid, derived from GPW4, multitemporal (1975, 1990, 2000, 2015)**. European Commission, Joint Research Centre (JRC) [Dataset] PID: http://data.europa.eu/89h/jrc-ghsl-ghs_pop_gpw4_globe_r2015a  
+* UNEP-WCMC and IUCN (year), **Protected Planet: The World Database on Protected Areas (WDPA)** [On-line], [insert month/year of the version used], Cambridge, UK: UNEP-WCMC and IUCN Available at: www.protectedplanet.net.  
+* http://www.fao.org/docrep/009/a0310e/a0310e00.htm  
