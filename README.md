@@ -73,7 +73,7 @@ The dataset were composed by:
     * **T5RoadDensity** = density for GRIP type 5 - local roads  
 
 # Workshop updates  
-Wokshop hel in Rio de JAneiro - IIS on 29/10/2018  
+Wokshop held in Rio de JAneiro - IIS on 29/10/2018  
 * [IDH](https://datadryad.org/resource/doi:10.5061/dryad.dk1j0)  
    * **IDH03** = IDH value for 2003
    * **IDH9017** = mean IDH value between 1990 - 2017  
@@ -105,7 +105,7 @@ Wokshop hel in Rio de JAneiro - IIS on 29/10/2018
     * cropIIS  
     * pastoIIS  
     * croppastureIIS  
-* [Governance](www.govindicators.org)
+* [Governance](http://www.govindicators.org)
     * govrnce = governance  
     Government Effectiveness captures perceptions of the quality of public services, the quality of the civil service and the degree of its independence from political pressures, the quality of policy formulation and implementation, and the credibility of the government's commitment to such policies
 * [Migration]  
@@ -125,7 +125,7 @@ Wokshop hel in Rio de JAneiro - IIS on 29/10/2018
     * phikcl  
     * sndppt: Sand   
 *  
- [Link to GEE analysis script](https://code.earthengine.google.com/0683ddcf65c09c9d123f5f88f826f9ee)
+ [Link to GEE analysis script](https://code.earthengine.google.com/c64a926e7f0958f9522beb30ec4702fa)
 
  ### 2nd Round [workshop] Results  
   :arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer5.csv)  
