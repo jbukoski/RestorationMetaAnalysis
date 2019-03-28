@@ -8,6 +8,8 @@ Economic and Ecological Restoration Meta Analysis Project
  - [X] [First Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#First-Round-Analysis): extract dataset values for different buffer sizes around study areas;  
  - [X] [Second Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Second-Round-Analysis): as first round was done missing few datasets, the second round should be the final one and with all layers expected;
  - [X] [Workshop update](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Workshop-updates): After second round, an update was done adding more layers considering workshop commets by specialists. :warning: **Updated on 08/12/2018**  
+ - [X] [Preliminar outpu](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Preliminar-Output)  
+ - [X] [Third round](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Third-Round)  
 
 # Analysis Validation  
 
@@ -48,7 +50,7 @@ The dataset were composed by:
  :arrow_double_down: [Buffer 50Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer50.csv)  
  :arrow_double_down: [Buffer 100Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer100.csv)  
 
- # Second Round Analysis
+# Second Round Analysis
 
  where added to the analysis the variables:
 
@@ -127,12 +129,28 @@ Wokshop held in Rio de JAneiro - IIS on 29/10/2018
 *  
  [Link to GEE analysis script](https://code.earthengine.google.com/c64a926e7f0958f9522beb30ec4702fa)
 
- ### 2nd Round [workshop] Results  
+### 2nd Round [workshop] Results  
   :arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer5.csv)  
   :arrow_double_down: [Buffer 10Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer10.csv)  
   :arrow_double_down: [Buffer 25Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer25.csv)  
   :arrow_double_down: [Buffer 50Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer50.csv)  
   :arrow_double_down: [Buffer 100Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer100.csv)  
+
+# Preliminar Output  
+After predictive selection done using randomForest algorithm on R, a preliminar predictive of the Landscape Variation were ran by biodiversity group (i.e. flora, vertebrates and invertebrates) on [GEE - link to model](TODO);  
+But during this process an inconsistency was found: estimate the mean value of a predictive value considering a buffer radii is not the same as estimating the value of the same layer after a "moving window" with the same radii of a buffer centroid. This could be proved by a R reproducible scrirpt simulating a random variable and estimating both scenarious, wheres each gave a different result.
+![](./img/BeforeMovingWindow.png)  
+![](./img/AfterMovingWindow.png)  
+
+Although the inconsistency found, the preliminary result were executed.  
+# Third Round  
+As a inconsistency was found ([read above](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Preliminar-Output)) this round aimed to get the predictive values of all points for each biodiversity group after running the "moving windows".  
+
+[Link to GEE analysis script](https://code.earthengine.google.com/a387060663977d668e2a6e37f819c758)  
+
+### 3rd Round Results  
+  :arrow_double_down: [All Data](https://felipesbarros.github.io/RestorationMetaAnalysis/R/3rdRoundTrain.csv)  
+
 
 # Scripts  
 
@@ -141,6 +159,9 @@ Wokshop held in Rio de JAneiro - IIS on 29/10/2018
 * [Cation Exchange Capacity](https://github.com/FelipeSBarros/RestorationMetaAnalysis/blob/master/R/Calculating_SoilCEC.R)  
 * [1st round data organization](https://github.com/FelipeSBarros/RestorationMetaAnalysis/blob/master/R/Organizing1stRoundSats.R)  
 * [2nd round data organization](https://github.com/FelipeSBarros/RestorationMetaAnalysis/blob/master/R/Organizing2ndRoundSats.R)  
+* [Buffer VS Moving Window estimates](https://github.com/FelipeSBarros/RestorationMetaAnalysis/blob/master/R/BufferMovingWindow.R)  
+* [3rd round data organization](https://github.com/FelipeSBarros/RestorationMetaAnalysis/blob/master/R/Organing3rdRoundStat.R)  
+
 
 # References  
 

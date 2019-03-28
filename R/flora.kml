@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="flora" id="flora">
+	<SimpleField name="Site" type="int"></SimpleField>
+</Schema>
+<Folder><name>flora</name>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">2</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-78,-1</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">26</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-48.686,-24.529</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">33</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>48.492,-18.917</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">39</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-61.75,-16.75</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">42</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-63.0,-15.75</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">51</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>120,-10</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">55</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-51.962,-7.771</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">64</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-60.183,-2.617</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-80.75,-1.7</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">75</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>112.367,-1.283</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">82</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>116.636,-1.03</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">89</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>114.0,-0.1</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">130</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-79.85,9.166</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">131</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-70.85,9.167</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">139</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-83.985,10.433</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">140</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-67.3,10.433</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">141</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-83.983,10.433</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">142</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-84.167,10.683</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">157</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-66.083,18.017</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">158</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-65.817,18.333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">162</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>98.515,18.553</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">163</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-95.105,18.582</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">165</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-70.52,19.378</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">168</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-96.792,19.567</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">175</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>92.375,23.558</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">177</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>101.278,24.063</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#flora">
+		<SimpleData name="Site">181</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>129.333,34.417</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

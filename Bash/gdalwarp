@@ -1,0 +1,19 @@
+# Reproject from goode Homolosine
+# source: https://gis.stackexchange.com/questions/17263/is-it-possible-to-use-the-goode-homolosine-projection-in-a
+
+gdalwarp -s_srs "+proj=igh +ellps=sphere +towgs84=0,0,0 +lon_0=100w +x_0=-11119487.43" -t_srs EPSG:4326 /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/Curtis/aau3445-Data-S3.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/Curtis/GlobalForestClasification.tif
+
+
+
+gdalwarp -s_srs "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs" -t_srs EPSG:4326 /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/IIS/opportunity_costs_cropland_4.9km_Molweide.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/IIS/opportunity_costs_cropland_4.9km_WGS84.tif
+
+gdalwarp -s_srs "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs" -t_srs EPSG:4326 /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/IIS/opportunity_costs_grassland_4.9km_Molweide.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/IIS/opportunity_costs_grassland_4.9km_WGS84.tif
+
+gdalwarp -dstnodata 8 -s_srs "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs" -t_srs EPSG:4326 /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/IIS/landuse2015_300m_Molweide.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/IIS/landuse2015_300m_WGS84.tif
+
+gdalwarp -s_srs "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs" -t_srs EPSG:4326 /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/IIS/DadosAlvaro/opportunity_costs_gras_900m_Molweide.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/IIS/DadosAlvaro/opportunity_costs_gras_900m_Molweide_WGS84.tif
+
+gdalwarp -s_srs "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs" -t_srs EPSG:4326 /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/IIS/DadosAlvaro/opportunity_costs_crop_900m_Molweide.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/IIS/DadosAlvaro/opportunity_costs_crop_900m_Molweide_WGS84.tif
+
+gdalwarp -s_srs "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs" -t_srs EPSG:4326 /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/IIS/DadosAlvaro/opportunity_costs_comb_900m_Molweide.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/IIS/DadosAlvaro/opportunity_costs_comb_900m_Molweide_WGS84.tif
+
