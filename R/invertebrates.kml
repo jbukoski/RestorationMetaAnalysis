@@ -2,162 +2,270 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document id="root_doc">
 <Schema name="invertebrates" id="invertebrates">
-	<SimpleField name="Site" type="int"></SimpleField>
+	<SimpleField name="Site" type="float"></SimpleField>
+	<SimpleField name="RR_var" type="float"></SimpleField>
+	<SimpleField name="prec.seas_25km" type="float"></SimpleField>
+	<SimpleField name="BAI.1317_5km" type="float"></SimpleField>
+	<SimpleField name="strictPA_25km" type="float"></SimpleField>
 </Schema>
 <Folder><name>invertebrates</name>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">3</SimpleData>
+		<SimpleData name="RR_var">1.66594296929878</SimpleData>
+		<SimpleData name="prec.seas_25km">23.175276532706</SimpleData>
+		<SimpleData name="BAI.1317_5km">12.9959212836624</SimpleData>
+		<SimpleData name="strictPA_25km">0.119355284763633</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-76.066,3.316</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">9</SimpleData>
+		<SimpleData name="RR_var">0.0937806647160666</SimpleData>
+		<SimpleData name="prec.seas_25km">52.0278290058417</SimpleData>
+		<SimpleData name="BAI.1317_5km">31.276940332528</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>116.369,-34.115</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">14</SimpleData>
+		<SimpleData name="RR_var">0.138595223116565</SimpleData>
+		<SimpleData name="prec.seas_25km">47.0627860243699</SimpleData>
+		<SimpleData name="BAI.1317_5km">9.63925861067026</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>150.896,-32.221</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">19</SimpleData>
+		<SimpleData name="RR_var">0.366866736732003</SimpleData>
+		<SimpleData name="prec.seas_25km">19.032307240777</SimpleData>
+		<SimpleData name="BAI.1317_5km">54.7383201781659</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>150.716,-27.012</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">22</SimpleData>
+		<SimpleData name="RR_var">0.806701049331912</SimpleData>
+		<SimpleData name="prec.seas_25km">108.755652568549</SimpleData>
+		<SimpleData name="BAI.1317_5km">28.8272930145459</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-48.567,-25.372</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">23</SimpleData>
+		<SimpleData name="RR_var">0.310675466296605</SimpleData>
+		<SimpleData name="prec.seas_25km">108.755652568549</SimpleData>
+		<SimpleData name="BAI.1317_5km">28.8272930145459</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-48.683,-25.3</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">27</SimpleData>
+		<SimpleData name="RR_var">1.12186399567569</SimpleData>
+		<SimpleData name="prec.seas_25km">27.6804268463915</SimpleData>
+		<SimpleData name="BAI.1317_5km">74.8909293837608</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-47.074,-23.739</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">34</SimpleData>
+		<SimpleData name="RR_var">0.0278955262351453</SimpleData>
+		<SimpleData name="prec.seas_25km">33.8856949100805</SimpleData>
+		<SimpleData name="BAI.1317_5km">5.72360943417748</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-39.751,-18.75</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">38</SimpleData>
+		<SimpleData name="RR_var">1.05822727168073</SimpleData>
+		<SimpleData name="prec.seas_25km">90.9872954571546</SimpleData>
+		<SimpleData name="BAI.1317_5km">431.29865007148</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>145.5,-17.0</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">41</SimpleData>
+		<SimpleData name="RR_var">0.191094778412601</SimpleData>
+		<SimpleData name="prec.seas_25km">23.570905279347</SimpleData>
+		<SimpleData name="BAI.1317_5km">31.9130113232504</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>145.415,-16.132</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">42</SimpleData>
+		<SimpleData name="RR_var">0.463913315358374</SimpleData>
+		<SimpleData name="prec.seas_25km">40.5364938468298</SimpleData>
+		<SimpleData name="BAI.1317_5km">601.641634063824</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-63.0,-15.75</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">54</SimpleData>
+		<SimpleData name="RR_var">0.144561277374425</SimpleData>
+		<SimpleData name="prec.seas_25km">51.9546141657396</SimpleData>
+		<SimpleData name="BAI.1317_5km">10.4098006985416</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-50.267,-7.833</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">57</SimpleData>
+		<SimpleData name="RR_var">0.484757543420432</SimpleData>
+		<SimpleData name="prec.seas_25km">20.3121459269389</SimpleData>
+		<SimpleData name="BAI.1317_5km">66.6950280154774</SimpleData>
+		<SimpleData name="strictPA_25km">7.63023863571333e-05</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>145.733,-5.0</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">67</SimpleData>
+		<SimpleData name="RR_var">0.285558340538687</SimpleData>
+		<SimpleData name="prec.seas_25km">138.014115152493</SimpleData>
+		<SimpleData name="BAI.1317_5km">25.606830917331</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-59.833,-2.417</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">70</SimpleData>
+		<SimpleData name="RR_var">1.16035368476806</SimpleData>
+		<SimpleData name="prec.seas_25km">15.5748502868673</SimpleData>
+		<SimpleData name="BAI.1317_5km">130.473571752603</SimpleData>
+		<SimpleData name="strictPA_25km">0.070363570613925</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-80.75,-1.7</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">73</SimpleData>
+		<SimpleData name="RR_var">0.506071190576329</SimpleData>
+		<SimpleData name="prec.seas_25km">86.888357319193</SimpleData>
+		<SimpleData name="BAI.1317_5km">16.6786368834219</SimpleData>
+		<SimpleData name="strictPA_25km">0.00607050789753</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>120.036,-1.507</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">80</SimpleData>
+		<SimpleData name="RR_var">0.0233704813495388</SimpleData>
+		<SimpleData name="prec.seas_25km">60.5182510073636</SimpleData>
+		<SimpleData name="BAI.1317_5km">19.538262191159</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-77.6,-1.066</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">87</SimpleData>
+		<SimpleData name="RR_var">0.363588075626444</SimpleData>
+		<SimpleData name="prec.seas_25km">79.8856545409189</SimpleData>
+		<SimpleData name="BAI.1317_5km">30.4188897547656</SimpleData>
+		<SimpleData name="strictPA_25km">0.039021505628793</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-52.561,-0.913</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">97</SimpleData>
+		<SimpleData name="RR_var">0.351802270908928</SimpleData>
+		<SimpleData name="prec.seas_25km">22.994827052479</SimpleData>
+		<SimpleData name="BAI.1317_5km">11.291279331966</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>103.495,1.84</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">102</SimpleData>
+		<SimpleData name="RR_var">0.136392614974065</SimpleData>
+		<SimpleData name="prec.seas_25km">51.2234647160069</SimpleData>
+		<SimpleData name="BAI.1317_5km">28.8791005113766</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>11.375,3.391</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">109</SimpleData>
+		<SimpleData name="RR_var">0.206842863472834</SimpleData>
+		<SimpleData name="prec.seas_25km">51.7478354552818</SimpleData>
+		<SimpleData name="BAI.1317_5km">21.2389712069962</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>117.8,4.966</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">116</SimpleData>
+		<SimpleData name="RR_var">1.55008322624395</SimpleData>
+		<SimpleData name="prec.seas_25km">24.9967350329455</SimpleData>
+		<SimpleData name="BAI.1317_5km">57.1429788289799</SimpleData>
+		<SimpleData name="strictPA_25km">0.003534098131635</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>116.703,6.046</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">141</SimpleData>
+		<SimpleData name="RR_var">0.0116517252373493</SimpleData>
+		<SimpleData name="prec.seas_25km">79.5374172778271</SimpleData>
+		<SimpleData name="BAI.1317_5km">11.8588514970909</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-83.983,10.433</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">153</SimpleData>
+		<SimpleData name="RR_var">0.252408573569085</SimpleData>
+		<SimpleData name="prec.seas_25km">31.5659458010589</SimpleData>
+		<SimpleData name="BAI.1317_5km">6.86232032288567</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-96.3,17.333</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">169</SimpleData>
+		<SimpleData name="RR_var">0.481960221567673</SimpleData>
+		<SimpleData name="prec.seas_25km">118.96914715357</SimpleData>
+		<SimpleData name="BAI.1317_5km">16.3866652220549</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-96.383,19.583</coordinates></Point>
   </Placemark>
   <Placemark>
 	<ExtendedData><SchemaData schemaUrl="#invertebrates">
 		<SimpleData name="Site">219</SimpleData>
+		<SimpleData name="RR_var">0.663643179700566</SimpleData>
+		<SimpleData name="prec.seas_25km">90.9872954571546</SimpleData>
+		<SimpleData name="BAI.1317_5km">431.29865007148</SimpleData>
+		<SimpleData name="strictPA_25km">0</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>152.5,-26.5</coordinates></Point>
   </Placemark>

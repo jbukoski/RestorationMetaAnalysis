@@ -3,7 +3,7 @@ library(tidyverse)
 
 ## Loading datasets ----
 # loading Pablo data
-load("dados.RF.CIFOR.RDat(a") # Dataset sent by Pablo
+load("dados.RF.CIFOR.RData") # Dataset sent by Pablo
 
 head(dados.plantas)
 head(dados.invertebrados)
@@ -21,15 +21,15 @@ length(sites)
 bd <- read_csv("./Database_18_06_01.csv")
 bd$Longitude <- as.numeric(bd$Longitude)
 sf.plantas <- bd %>% filter(
-  Site %in% unique(dados.plantas$Site), !is.na(Latitude) | !is.na(Longitude)) %>% st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326)
+  Site %in% unique(dados.plantas$Site), !is.na(Latitude) | !is.na(Longitude)) %>% st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>% left_join(dados.plantas)
 st_write(sf.plantas, "flora.kml", driver = "KML")
 
 sf.vertebrados <- bd %>% filter(
-  Site %in% unique(dados.vertebrados$Site), !is.na(Latitude) | !is.na(Longitude)) %>% st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326)
+  Site %in% unique(dados.vertebrados$Site), !is.na(Latitude) | !is.na(Longitude)) %>% st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>% left_join(dados.vertebrados)
 st_write(sf.vertebrados, "vertebrates.kml", driver = "KML")
 
 sf.invertebrados <- bd %>% filter(
-  Site %in% unique(dados.invertebrados$Site), !is.na(Latitude) | !is.na(Longitude)) %>% st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326)
+  Site %in% unique(dados.invertebrados$Site), !is.na(Latitude) | !is.na(Longitude)) %>% st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>% left_join(dados.invertebrados)
 st_write(sf.invertebrados, "invertebrates.kml", driver = "KML")
 
 sf.all <- bd %>% filter(

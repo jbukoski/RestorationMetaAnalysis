@@ -143,10 +143,24 @@ But during this process an inconsistency was found: estimate the mean value of a
 ![](./img/AfterMovingWindow.png)  
 
 Although the inconsistency found, the preliminary result were executed.  
-# Third Round  
-As a inconsistency was found ([read above](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Preliminar-Output)) this round aimed to get the predictive values of all points for each biodiversity group after running the "moving windows".  
 
-[Link to GEE analysis script](https://code.earthengine.google.com/a387060663977d668e2a6e37f819c758)  
+# Third Round  
+~~As a inconsistency was found ([read above](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Preliminar-Output)) this round aimed to get the predictive values of all points for each biodiversity group after running the "moving windows".~~  
+
+~~[Link to GEE analysis script](https://code.earthengine.google.com/a387060663977d668e2a6e37f819c758)~~  
+
+After back and forth to understand the issues reported on ([preliminar output](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Preliminar-Output)) we found that:  
+
+1. *focal* algorithm implemented on R has a issue wich makes values quite different from the point buffer approach;  
+1. We could confirm that this issue is not present on GEE; Thus, all the process will be done on GEE and using the point buffer approach to fit randomForest Model (already done); On R/GDAL/QGIS we will only do few post-processing steps;  
+  * Mosaic model/mask;  
+  * Warp to the study area limit model/mask;  
+  * Map layout;  
+
+* Link to GEE analysis script:  
+    * [Flora script](https://code.earthengine.google.com/f9e5534f1f6c91cad8da176973ebe7fd)  
+    * [Invertebrades script]()  
+    * [Vertebrades script]()  
 
 ### 3rd Round Results  
   :arrow_double_down: [All Data](https://felipesbarros.github.io/RestorationMetaAnalysis/R/3rdRoundTrain.csv)  
