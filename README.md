@@ -159,8 +159,8 @@ After back and forth to understand the issues reported on ([preliminar output](h
 
 * Link to GEE analysis script:  
     * [Flora script](https://code.earthengine.google.com/f9e5534f1f6c91cad8da176973ebe7fd)  
-    * [Invertebrades script]()  
-    * [Vertebrades script]()  
+    * [Invertebrades script](https://code.earthengine.google.com/3724e23d1310fc42235bc3d36c262f17)  
+    * [Vertebrades script](https://code.earthengine.google.com/be015bb15e7d41a2499de4f4db2e19e5)  
 
 ### 3rd Round Results  
   :arrow_double_down: [All Data](https://felipesbarros.github.io/RestorationMetaAnalysis/R/3rdRoundTrain.csv)  
