@@ -1,0 +1,69 @@
+gdal_rasterize [-b band]* [-i] [-at]
+       {[-burn value]* | [-a attribute_name] | [-3d]} [-add]
+       [-l layername]* [-where expression] [-sql select_statement]
+       [-dialect dialect] [-of format] [-a_srs srs_def] [-to NAME=VALUE]*
+       [-co "NAME=VALUE"]* [-a_nodata value] [-init value]*
+       [-te xmin ymin xmax ymax] [-tr xres yres] [-tap] [-ts width height]
+       [-ot {Byte/Int16/UInt16/UInt32/Int32/Float32/Float64/
+             CInt16/CInt32/CFloat32/CFloat64}] [-q]
+       <src_datasource> <dst_filename>
+
+## 1. Organizing som input layers
+# converting *.shp file to *.tif 
+# Biomes
+gdal_rasterize -at -burn 1 -a_nodata -999 -ot 'Byte' -te -180.0000000 -60.0000000 180.0000000 90.0000000 -tr 0.00833333 -0.00833333 -l  wwf_terr_ecos wwf_terr_ecos.shp -where  'BIOME in (1,2,3,4,5)' -of GTiff forestAreas.tif
+
+# Governance
+gdal_rasterize -at -a Men9610 -a_nodata -999 -te -180.0000000 -60.0000000 180.0000000 90.0000000 -tr 0.00296338 -0.00296341 -l  GovernancePolygon GovernancePolygon.shp -of GTiff GovernancePolygon.tif
+
+gdal_rasterize -at -a Men9610 -a_nodata -999 -te -179.9999995223580811 -72.3196438006479099 179.9977664918468747 85.0728813559317558 -tr 0.00296338 -0.00296341 -l  GovernancePolygon GovernancePolygon.shp -of GTiff GovernancePolygon.tif
+
+gdal_rasterize -at -a GovMean961 -a_nodata -999 -te -179.9999995223580811 -72.3196438006479099 179.9977664918468747 85.0728813559317558 -tr 0.008333330000000 -0.008333330000000 -l  GovernancePolygon GovernancePolygon.shp -of GTiff GovernancePolygon.tif
+
+
+## 2. Organizing land variation results:
+# Invertebrades
+gdalwarp -of GTiff -srcnodata 0 -multi -dstnodata 99999 -cutline /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/StudyArea.kml -crop_to_cutline -overwrite /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Invertebrades/OcaniaInvertResults.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Invertebrades/AfricaInvertResults.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Invertebrades/AmericaInvertResults.tif  /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Invertebrades/InvertebradesMerged.tif
+
+
+# Vertebrades
+gdalwarp -of GTiff -srcnodata 0 -multi -dstnodata 99999 -cutline /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/StudyArea.kml -crop_to_cutline -overwrite /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Vertebrades/OceaniaVertResults.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Vertebrades/AfricaVertResults.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Vertebrades/AmericaVertResults.tif  /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Vertebrades/VertebradesMerged.tif
+
+# Mask
+gdalwarp -of GTiff -srcnodata 0 -multi -dstnodata 99999 -cutline /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/StudyArea.kml -crop_to_cutline -overwrite /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Mask/OceaniaMask.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Mask/AfricaMask.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Mask/AmericaMask.tif  /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Mask/MaskMerged.tif
+
+
+# Flora
+gdal_merge.py -of GTiff -o /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/4thRound/StrictlyMerged.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/4thRound/AsiaOceania_strictlyProtectedRaster.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/4thRound/AfricaAsia_strictlyProtectedRaster.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/4thRound/America_strictlyProtectedRaster.tif
+
+# Orgnizing Restorable Amount
+gdalwarp -of GTiff -multi -cutline /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/StudyArea.kml -crop_to_cutline -overwrite -te -122.1189111747849978 -35.0000000000000000 180.0000000000000000 35.0000000000000000 -tr 0.00898308 -0.00898357 -dstnodata 999 /media/felipe/DATA/Repos/WorldRestorationUncertainty/GEE/1KMGlobalForest_RestAmount_alignedMergedNAMaskedForesBiomes.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/RestAmount.tif
+
+gdalcompare.py -sds /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/RestAmount.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/ForestBiomesRaster.tif
+
+
+# rasterizing countries to apply zonal stats
+gdal_rasterize -a ID_Country -a_nodata 999 -te -122.1189111747849978 -35.0000000000000000 180.0000000000000000 35.0000000000000000 -tr 0.00898308 -0.00898357 -l Countries /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/Countries.shp -of GTiff  /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/CountriesRaster.tif
+
+# rasterizing biomes to apply zonal stats
+gdal_rasterize -a ID_Biome -a_nodata 999 -te -122.1189111747849978 -35.0000000000000000 180.0000000000000000 35.0000000000000000 -tr 0.00898308 -0.00898357 -l ForestBiomes /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/Ecoregions2017/ForestBiomes.shp -of GTiff  /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/ForestBiomesRaster.tif
+
+# rasteriing biomes: one biome for each band:
+gdal_rasterize -burn 1 -ot Byte -a_nodata 0 -te -122.1189111747849978 -35.0000000000000000 180.0000000000000000 35.0000000000000000 -tr 0.00898308 -0.00898357 -where 'ID_Biome=1' -l ForestBiomes /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/Ecoregions2017/ForestBiomes.shp -of GTiff  /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/ForestBiomesRaster1.tif 
+
+gdal_rasterize -burn 1 -ot Byte -a_nodata 0 -te -122.1189111747849978 -35.0000000000000000 180.0000000000000000 35.0000000000000000 -tr 0.00898308 -0.00898357 -where 'ID_Biome=2' -l ForestBiomes /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/Ecoregions2017/ForestBiomes.shp -of GTiff  /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/ForestBiomesRaster2.tif 
+
+gdal_rasterize -burn 1 -ot Byte -a_nodata 0 -te -122.1189111747849978 -35.0000000000000000 180.0000000000000000 35.0000000000000000 -tr 0.00898308 -0.00898357 -where 'ID_Biome=3' -l ForestBiomes /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/Ecoregions2017/ForestBiomes.shp -of GTiff  /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/ForestBiomesRaster3.tif 
+
+gdal_rasterize -burn 1 -ot Byte -a_nodata 0 -te -122.1189111747849978 -35.0000000000000000 180.0000000000000000 35.0000000000000000 -tr 0.00898308 -0.00898357 -where 'ID_Biome=4' -l ForestBiomes /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/Ecoregions2017/ForestBiomes.shp -of GTiff  /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/ForestBiomesRaster4.tif 
+
+gdal_rasterize -burn 1 -ot Byte -a_nodata 0 -te -122.1189111747849978 -35.0000000000000000 180.0000000000000000 35.0000000000000000 -tr 0.00898308 -0.00898357 -where 'ID_Biome=5' -l ForestBiomes /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/Ecoregions2017/ForestBiomes.shp -of GTiff  /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/ForestBiomesRaster5.tif 
+
+
+gdal_merge.py -o /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/biomes.tif -of GTiff -separate -v -n 0 -a_nodata 0 -ot Byte /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/ForestBiomesRaster1.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/ForestBiomesRaster2.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/ForestBiomesRaster3.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/ForestBiomesRaster4.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/ForestBiomesRaster5.tif 
+
+gdal_calc.py -A /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Invertebrades/InvertebradesMerged.tif -B /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/RestAmount.tif -C /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/biomes.tif --allBands=C --outfile=/media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/InvertWeightedBiomes.tif --calc="(A*B)*C" --overwrite
+
+
+gdal_calc.py -A /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Invertebrades/InvertebradesMerged.tif -B /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/RestAmount.tif -C /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/ForestBiomesRaster1.tif --allBands=C --outfile=/media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/InvertWeightedBiomes.tif --calc="(A*B)*C" --overwrite
+
