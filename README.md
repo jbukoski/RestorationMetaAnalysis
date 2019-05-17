@@ -137,12 +137,22 @@ Wokshop held in Rio de JAneiro - IIS on 29/10/2018
   :arrow_double_down: [Buffer 100Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer100.csv)  
 
 # Preliminar Output  
-After predictive selection done using randomForest algorithm on R, a preliminar predictive of the Landscape Variation were ran by biodiversity group (i.e. flora, vertebrates and invertebrates) on [GEE - link to model](TODO);  
-But during this process an inconsistency was found: estimate the mean value of a predictive value considering a buffer radii is not the same as estimating the value of the same layer after a "moving window" with the same radii of a buffer centroid. This could be proved by a R reproducible scrirpt simulating a random variable and estimating both scenarious, wheres each gave a different result.
-![](./img/BeforeMovingWindow.png)  
-![](./img/AfterMovingWindow.png)  
+After predictive selection done using randomForest algorithm on R, a preliminar predictive of the Landscape Variation were ran by biodiversity group (i.e. flora, vertebrates and invertebrates) on GEE - link to model;  
+~~But during this process an inconsistency was found: estimate the mean value of a predictive value considering a buffer radii is not the same as estimating the value of the same layer after a "moving window" with the same radii of a buffer centroid. This could be proved by a R reproducible script simulating a random variable and estimating both scenarios, wheres each gave a different result.~~  
+![](./img/BeforeMovingWindow.png){:height="50%" width="50%"}  
+![](./img/AfterMovingWindow.png){:height="50%" width="50%"}  
 
-Although the inconsistency found, the preliminary result were executed.  
+~~Although the inconsistency found,~~ the preliminary result were executed.  
+:warning: The 'inconsistency' above mentioned were discussed and were realized that:  
+ * The focal process developed on R is quite "different" from expected;
+ * The focal process on GEE had the expected value;  
+
+According to Hawthorne, the issue with R's focal implementation can be overcome with the code snippet:  
+```r
+focal(striclyPA, kernel, "sum", na.rm=TRUE) / sum(kernel)
+```  
+
+Thus the process to be run will all be done in GEE;  
 
 # Third Round  
 ~~As a inconsistency was found ([read above](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Preliminar-Output)) this round aimed to get the predictive values of all points for each biodiversity group after running the "moving windows".~~  
@@ -162,8 +172,10 @@ After back and forth to understand the issues reported on ([preliminar output](h
     * [Invertebrades script](https://code.earthengine.google.com/3724e23d1310fc42235bc3d36c262f17)  
     * [Vertebrades script](https://code.earthengine.google.com/be015bb15e7d41a2499de4f4db2e19e5)  
 
-### 3rd Round Results  
-  :arrow_double_down: [All Data](https://felipesbarros.github.io/RestorationMetaAnalysis/R/3rdRoundTrain.csv)  
+### 3rd Round Statistics Results  
+  :arrow_double_down: [Flora](https://felipesbarros.github.io/RestorationMetaAnalysis/R/LandscapeVarBiomes_Flora.csv)  
+  :arrow_double_down: [Invertebrates](https://felipesbarros.github.io/RestorationMetaAnalysis/R/LandscapeVarBiomes_Invertebrates.csv)  
+  :arrow_double_down: [Vertebrates](https://felipesbarros.github.io/RestorationMetaAnalysis/R/LandscapeVarBiomes_Vertebrates.csv)  
 
 
 # Scripts  
@@ -175,6 +187,10 @@ After back and forth to understand the issues reported on ([preliminar output](h
 * [2nd round data organization](https://github.com/FelipeSBarros/RestorationMetaAnalysis/blob/master/R/Organizing2ndRoundSats.R)  
 * [Buffer VS Moving Window estimates](https://github.com/FelipeSBarros/RestorationMetaAnalysis/blob/master/R/BufferMovingWindow.R)  
 * [3rd round data organization](https://github.com/FelipeSBarros/RestorationMetaAnalysis/blob/master/R/Organing3rdRoundStat.R)  
+
+## GDAL  
+
+* [pos-processing scripts](https://github.com/FelipeSBarros/RestorationMetaAnalysis/blob/master/Bash/gdal_Scripts)  
 
 
 # References  

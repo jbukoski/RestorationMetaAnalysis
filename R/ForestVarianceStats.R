@@ -23,6 +23,15 @@ r.vert <- raster("./3rdRoundResult/Vertebrades/VertebradesMerged.tif")
 r.vert2 <- raster("./3rdRoundResult/VertedWeighted.tif")
 # plot(r.vert2, maxpixels=10000)
 
+# Loading invertebrates results
+r.flora <- raster("./3rdRoundResult/Flora/FloraMerged2Norm.tif")
+#r.flora <- calc(FloraRaster, fun = function(x){x*1})
+#writeRaster(r.flora, "./3rdRoundResult/Flora/FloraMerged2Mod.tif", overwrite =  T)
+# overlay(r.flora, r.restAmount, filename= "./3rdRoundResult/FloraWeighted.tif", fun = function(x,y){return(x*y)}, overwrite = TRUE)
+r.flora2 <- raster("./3rdRoundResult/FloraWeighted.tif")
+plot(r.flora2, maxpixels=10000)
+
+
 # Normalizing Forest Variance ----
 #vertRaster <- raster("./3rdRoundResult/Vertebrades/VertebradesMerged.tif")
 #vertRasterNorm <- vertRaster/vertRaster@data@max
@@ -33,6 +42,10 @@ r.vert2 <- raster("./3rdRoundResult/VertedWeighted.tif")
 #invertRasterNorm
 #writeRaster(invertRasterNorm, "./3rdRoundResult/Invertebrades/InvertebradesMerged.tif", overwrite = TRUE)
 
+#FloraRaster <- raster("./3rdRoundResult/Flora/FloraMerged2Mod.tif")
+#FloraRasterNorm <- FloraRaster/FloraRaster@data@max
+#writeRaster(FloraRasterNorm, "./3rdRoundResult/Flora/FloraMerged2Norm.tif", overwrite = TRUE)
+
 
 # Zonal stats ----
 # InVert
@@ -42,7 +55,8 @@ Mean.Country.stats.invert <- as_tibble(Mean.Country.stats.invert) %>% plyr::rena
 SD.Country.stats.invert <- zonal(r.invert, r.countries, fun = "sd", na.rm = TRUE, progress="text")
 SD.Country.stats.invert <- as_tibble(SD.Country.stats.invert) %>% plyr::rename(c("sd" = "SDCountryInvert"))
 # Merging SD and Mean stats and organizing columns
-Invert.CountryStats <- SD.Country.stats.invert %>% left_join(Mean.Country.stats.invert, by = "zone") %>% left_join(country, by = c("zone" = "ID_Country")) %>% select(CNTRY_NAME, zone, MeanCountryInvert, SDCountryInvert)
+Invert.CountryStats <- SD.Country.stats.invert %>% left_join(Mean.Country.stats.invert, by = "zone") %>% left_join(country, by = c("zone" = "ID_Country")) %>% select(CNTRY_NAME, zone, MeanCountryInvert, SDCountryInvert) %>% drop_na()
+write.csv(Invert.CountryStats, "CountryStats.Invertebrates.csv")
 
 ## Country*Restoration Amount
 Mean.Country.stats.invert <- zonal(r.invert2, r.countries, fun = "mean", na.rm = TRUE, progress="text")
@@ -50,7 +64,7 @@ Mean.Country.stats.invert <- as_tibble(Mean.Country.stats.invert) %>% plyr::rena
 SD.Country.stats.invert <- zonal(r.invert, r.countries, fun = "sd", na.rm = TRUE, progress="text")
 SD.Country.stats.invert <- as_tibble(SD.Country.stats.invert) %>% plyr::rename(c("sd" = "weightedSDCountryInvert"))
 # Merging SD and Mean stats and organizing columns
-Invert.CountryStats <- SD.Country.stats.invert %>% left_join(Mean.Country.stats.invert, by = "zone") %>% left_join(country, by = c("zone" = "ID_Country")) %>% select(CNTRY_NAME, zone, weightedMeanCountryInvert, weightedSDCountryInvert)
+Invert.CountryStats <- SD.Country.stats.invert %>% left_join(Mean.Country.stats.invert, by = "zone") %>% left_join(country, by = c("zone" = "ID_Country")) %>% select(CNTRY_NAME, zone, weightedMeanCountryInvert, weightedSDCountryInvert) %>% drop_na()
 
 # Invert.CountryStats %>% dplyr::filter(zone == 269)
 write.csv(Invert.CountryStats, "weightedCountryStats.Invertebrates.csv")
@@ -61,7 +75,8 @@ Mean.Biome.stats.invert <- as_tibble(Mean.Biome.stats.invert) %>% plyr::rename(c
 SD.Biome.stats.invert <- zonal(r.invert, r.biomes, fun = "sd", na.rm = TRUE, progress="text")
 SD.Biome.stats.invert <- as_tibble(SD.Biome.stats.invert) %>% plyr::rename(c("sd" = "SDBiomeInvert"))
 # Merging SD and Mean stats and organizing columns
-Invert.BiomeStats <- SD.Biome.stats.invert %>% left_join(Mean.Biome.stats.invert, by = "zone") %>% left_join(biome, by = c("zone" = "Biome_ID")) %>% select(BIOME_NAME, zone, MeanBiomeInvert, SDBiomeInvert) %>% distinct()
+Invert.BiomeStats <- SD.Biome.stats.invert %>% left_join(Mean.Biome.stats.invert, by = "zone") %>% left_join(biome, by = c("zone" = "Biome_ID")) %>% select(BIOME_NAME, zone, MeanBiomeInvert, SDBiomeInvert) %>% distinct() %>% drop_na()
+write.csv(Invert.BiomeStats, "BiomesStats.Invertebrates.csv")
 
 ## Biome*RestorationAmount
 Mean.Biome.stats.invert <- zonal(r.invert2, r.biomes, fun = "mean", na.rm = TRUE, progress="text")
@@ -69,7 +84,7 @@ Mean.Biome.stats.invert <- as_tibble(Mean.Biome.stats.invert) %>% plyr::rename(c
 SD.Biome.stats.invert <- zonal(r.invert, r.biomes, fun = "sd", na.rm = TRUE, progress="text")
 SD.Biome.stats.invert <- as_tibble(SD.Biome.stats.invert) %>% plyr::rename(c("sd" = "weightedSDBiomeInvert"))
 # Merging SD and Mean stats and organizing columns
-Invert.BiomeStats <- SD.Biome.stats.invert %>% left_join(Mean.Biome.stats.invert, by = "zone") %>% left_join(biome, by = c("zone" = "Biome_ID")) %>% select(BIOME_NAME, zone, weightedMeanBiomeInvert, weightedSDBiomeInvert) %>% distinct()
+Invert.BiomeStats <- SD.Biome.stats.invert %>% left_join(Mean.Biome.stats.invert, by = "zone") %>% left_join(biome, by = c("zone" = "Biome_ID")) %>% select(BIOME_NAME, zone, weightedMeanBiomeInvert, weightedSDBiomeInvert) %>% distinct() %>% drop_na()
 
 # Invert.CountryStats %>% dplyr::filter(zone == 269)
 write.csv(Invert.BiomeStats, "weightedBiomeStats.Invertebrates.csv")
@@ -83,6 +98,7 @@ SD.Country.stats.vert <- zonal(r.vert, r.countries, fun = "sd", na.rm = TRUE, pr
 SD.Country.stats.vert<- as_tibble(SD.Country.stats.vert) %>% plyr::rename(c("sd" = "SDCountryVert"))
 # Merging SD and Mean stats and organizing columns
 vert.CountryStats <- SD.Country.stats.vert %>% left_join(Mean.Country.stats.vert, by = "zone") %>% left_join(country, by = c("zone" = "ID_Country")) %>% select(CNTRY_NAME, zone, MeanCountryVert, SDCountryVert) %>% drop_na()
+write.csv(vert.CountryStats, "CountryStats.Vertebrates.csv")
 
 ## Country*restoration Amount
 Mean.Country.stats.vert <- zonal(r.vert2, r.countries, fun = "mean", na.rm = TRUE, progress="text")
@@ -101,7 +117,7 @@ Mean.Biome.stats.vert <- as_tibble(Mean.Biome.stats.vert) %>% plyr::rename(c("me
 SD.Biome.stats.vert <- zonal(r.vert, r.biomes, fun = "sd", na.rm = TRUE, progress="text")
 SD.Biome.stats.vert <- as_tibble(SD.Biome.stats.vert) %>% plyr::rename(c("sd" = "SDBiomeVert"))
 # Merging SD and Mean stats and organizing columns
-vert.BiomeStats <- SD.Biome.stats.vert %>% left_join(Mean.Biome.stats.vert, by = "zone") %>% left_join(biome, by = c("zone" = "Biome_ID")) %>% select(BIOME_NAME, zone, MeanBiomeVert, SDBiomeVert) %>% distinct()
+vert.BiomeStats <- SD.Biome.stats.vert %>% left_join(Mean.Biome.stats.vert, by = "zone") %>% left_join(biome, by = c("zone" = "Biome_ID")) %>% select(BIOME_NAME, zone, MeanBiomeVert, SDBiomeVert) %>% distinct() %>% drop_na()
 
 # vert.CountryStats %>% dplyr::filter(zone == 269)
 write.csv(vert.BiomeStats, "BiomeStats.vertebrates.csv")
@@ -112,10 +128,54 @@ Mean.Biome.stats.vert <- as_tibble(Mean.Biome.stats.vert) %>% plyr::rename(c("me
 SD.Biome.stats.vert <- zonal(r.vert, r.biomes, fun = "sd", na.rm = TRUE, progress="text")
 SD.Biome.stats.vert <- as_tibble(SD.Biome.stats.vert) %>% plyr::rename(c("sd" = "weightedSDBiomeVert"))
 # Merging SD and Mean stats and organizing columns
-vert.BiomeStats <- SD.Biome.stats.vert %>% left_join(Mean.Biome.stats.vert, by = "zone") %>% left_join(biome, by = c("zone" = "Biome_ID")) %>% select(BIOME_NAME, zone, weightedMeanBiomeVert, weightedSDBiomeVert) %>% distinct()
+vert.BiomeStats <- SD.Biome.stats.vert %>% left_join(Mean.Biome.stats.vert, by = "zone") %>% left_join(biome, by = c("zone" = "Biome_ID")) %>% select(BIOME_NAME, zone, weightedMeanBiomeVert, weightedSDBiomeVert) %>% distinct() %>% drop_na()
 
 # vert.CountryStats %>% dplyr::filter(zone == 269)
 write.csv(vert.BiomeStats, "weightedBiomeStats.vertebrates.csv")
+
+# Flora
+## Country
+Mean.Country.stats.flora <- zonal(r.flora, r.countries, fun = "mean", na.rm = TRUE, progress="text")
+Mean.Country.stats.flora <- as_tibble(Mean.Country.stats.flora) %>% plyr::rename(c("mean" = "MeanCountryFlora"))
+SD.Country.stats.flora <- zonal(r.flora, r.countries, fun = "sd", na.rm = TRUE, progress="text")
+SD.Country.stats.flora <- as_tibble(SD.Country.stats.flora) %>% plyr::rename(c("sd" = "SDCountryFlora"))
+# Merging SD and Mean stats and organizing columns
+flora.CountryStats <- SD.Country.stats.flora %>% left_join(Mean.Country.stats.flora, by = "zone") %>% left_join(country, by = c("zone" = "ID_Country")) %>% select(CNTRY_NAME, zone, MeanCountryFlora, SDCountryFlora) %>% drop_na()
+write.csv(flora.CountryStats, "CountryStats.flora.csv")
+
+## Country*restoration Amount
+Mean.Country.stats.flora <- zonal(r.flora, r.countries, fun = "mean", na.rm = TRUE, progress="text")
+Mean.Country.stats.flora <- as_tibble(Mean.Country.stats.flora) %>% plyr::rename(c("mean" = "weightedMeanCountryFlora"))
+SD.Country.stats.flora <- zonal(r.flora, r.countries, fun = "sd", na.rm = TRUE, progress="text")
+SD.Country.stats.flora <- as_tibble(SD.Country.stats.flora) %>% plyr::rename(c("sd" = "weightedSDCountryFlora"))
+# Merging SD and Mean stats and organizing columns
+flora.CountryStats <- SD.Country.stats.flora %>% left_join(Mean.Country.stats.flora, by = "zone") %>% left_join(country, by = c("zone" = "ID_Country")) %>% select(CNTRY_NAME, zone, weightedMeanCountryFlora, weightedSDCountryFlora) %>% drop_na()
+
+
+write.csv(flora.CountryStats, "weightedCountryStats.Flora.csv")
+
+## Biome
+Mean.Biome.stats.flora <- zonal(r.flora, r.biomes, fun = "mean", na.rm = TRUE, progress="text")
+Mean.Biome.stats.flora <- as_tibble(Mean.Biome.stats.flora) %>% plyr::rename(c("mean" = "MeanBiomeFlora"))
+SD.Biome.stats.flora <- zonal(r.vert, r.biomes, fun = "sd", na.rm = TRUE, progress="text")
+SD.Biome.stats.flora <- as_tibble(SD.Biome.stats.vert) %>% plyr::rename(c("sd" = "SDBiomeFlora"))
+# Merging SD and Mean stats and organizing columns
+flora.BiomeStats <- SD.Biome.stats.flora %>% left_join(Mean.Biome.stats.flora, by = "zone") %>% left_join(biome, by = c("zone" = "Biome_ID")) %>% select(BIOME_NAME, zone, MeanBiomeFlora, SDBiomeFlora) %>% distinct()
+
+
+write.csv(flora.BiomeStats, "BiomeStats.flora.csv")
+
+## Biome* RestorationAmount
+Mean.Biome.stats.flora <- zonal(r.flora2, r.biomes, fun = "mean", na.rm = TRUE, progress="text")
+Mean.Biome.stats.flora <- as_tibble(Mean.Biome.stats.vert) %>% plyr::rename(c("mean" = "weightedMeanBiomeFlora"))
+SD.Biome.stats.flora <- zonal(r.flora2, r.biomes, fun = "sd", na.rm = TRUE, progress="text")
+SD.Biome.stats.flora <- as_tibble(SD.Biome.stats.flora) %>% plyr::rename(c("sd" = "weightedSDBiomeFlora"))
+# Merging SD and Mean stats and organizing columns
+flora.BiomeStats <- SD.Biome.stats.flora %>% left_join(Mean.Biome.stats.flora, by = "zone") %>% left_join(biome, by = c("zone" = "Biome_ID")) %>% select(BIOME_NAME, zone, weightedMeanBiomeFlora, weightedSDBiomeFlora) %>% distinct()
+
+# vert.CountryStats %>% dplyr::filter(zone == 269)
+write.csv(flora.BiomeStats, "weightedBiomeStats.Flora.csv")
+
 
 rm(list=ls())
 gc()
@@ -143,15 +203,26 @@ gc()
 # Histo por bioma ----
 biomaLayers <- brick("/media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/biomes.tif")
 
+biomes.ref <- read_csv("/media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/BiomeStats.vertebrates.csv")[c("BIOME_NAME","zone")]
+
+# Landscape Variation
+# overlay(biomaLayers, r.invert, filename= "./3rdRoundResult/InvertBiomes.tif", fun = function(x,y){return(x*y)}, overwrite = TRUE)
+InvertBiomesLscapeVar <- stack("./3rdRoundResult/InvertBiomes.tif")
+
+# overlay(biomaLayers, r.vert, filename= "./3rdRoundResult/VertBiomes.tif", fun = function(x,y){return(x*y)}, overwrite = TRUE)
+VertBiomesLscapeVar <- stack("./3rdRoundResult/VertBiomes.tif")
+
+# overlay(biomaLayers, r.flora, filename= "./3rdRoundResult/FloraBiomes.tif", fun = function(x,y){return(x*y)}, overwrite = TRUE)
+FloraBiomesLscapeVar <- stack("./3rdRoundResult/FloraBiomes.tif")
+
+# Landscape Weighted ----
 # overlay(biomaLayers, r.invert2, filename= "./3rdRoundResult/InvertWeightedBiomes.tif", fun = function(x,y){return(x*y)})
 InvertBiomes <- stack("./3rdRoundResult/InvertWeightedBiomes.tif")
 
 # overlay(biomaLayers, r.vert2, filename= "./3rdRoundResult/VertWeightedBiomes.tif", fun = function(x,y){return(x*y)})
 VertBiomes <- stack("./3rdRoundResult/VertWeightedBiomes.tif")
 
-biomes.ref <- read_csv("/media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/BiomeStats.vertebrates.csv")[c("BIOME_NAME","zone")]
-
-# data extract fct
+# data extract fct ----
 extct.fct <- function(r.biomes = InvertBiomes, biomes.ref, suffix = "Invert", ...){
   library(raster)
   library(tibble)
@@ -168,6 +239,37 @@ extct.fct <- function(r.biomes = InvertBiomes, biomes.ref, suffix = "Invert", ..
 }
 
 # Using fct ----
+# Landscape Variation
+Invert <- extct.fct(InvertBiomesLscapeVar, biomes.ref, suffix = "Invertebrades", digits = 4, useNA='no', progress = "text", merge = TRUE)
+write_csv(Invert, "LandscapeVarBiomes_Invertabrates.csv")
+
+Invert <- read_csv("./LandscapeVarBiomes_Invertabrates.csv")
+unique(Invert$zone)
+max(Invert$value, na.rm = T)
+max(Invert$count, na.rm = T)
+
+# Vertebrates
+Vert <- extct.fct(VertBiomesLscapeVar, biomes.ref, suffix = "Vertebrades", digits = 4, useNA='no', progress = "text", merge = TRUE)
+write_csv(Vert, "LandscapeVarBiomes_Vertabrates.csv")
+
+Vert <- read_csv("LandscapeVarBiomes_Vertabrates.csv")
+unique(Vert$zone)
+max(Vert$value, na.rm = T)
+max(Vert$count, na.rm = T)
+
+# Flora
+Flora <- extct.fct(FloraBiomesLscapeVar, biomes.ref, suffix = "Flora", digits = 4, useNA='no', progress = "text", merge = TRUE)
+write_csv(Flora, "LandscapeVarBiomes_Flora.csv")
+
+Flora <- read_csv("LandscapeVarBiomes_Flora.csv")
+unique(Vert$zone)
+max(Vert$value, na.rm = T)
+max(Vert$count, na.rm = T)
+
+Vert <- Vert %>% mutate(zone = as.numeric(zone))
+allLscapeVar <- bind_rows(Vert, Invert, Flora)
+
+# LandscapeVar weighted NOT USED ----
 # Invertebrates
 # Invert <- extct.fct(InvertBiomes, biomes.ref, suffix = "Invertebrades", digits = 4, useNA='no', progress = "text", merge = TRUE)
 # write_csv(Invert, "WeightedLandscapeVarBiomes_Invertabrates.csv")
@@ -190,6 +292,12 @@ all <- bind_rows(Vert, Invert)
 
 # plot -----
 library(ggplot2)
+
+# Landscape Variation ----
+allLscapeVar %>% filter(zone %in% c(1:3)) %>% ggplot(aes(x = value, group = group, color = group, fill = group)) + geom_density(alpha = 0.5) + facet_wrap(.~class) + theme_bw()
+ggsave("LandscapeVar.png")
+
+# Weighted ----
 all %>% filter(zone %in% c(1:3)) %>% ggplot(aes(x = value, group = group, color = group, fill = group)) + geom_density(alpha = 0.5) + facet_wrap(.~class) + theme_bw()
 
 #install.packages("ggridges")
