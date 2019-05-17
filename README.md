@@ -139,8 +139,8 @@ Wokshop held in Rio de JAneiro - IIS on 29/10/2018
 # Preliminar Output  
 After predictive selection done using randomForest algorithm on R, a preliminar predictive of the Landscape Variation were ran by biodiversity group (i.e. flora, vertebrates and invertebrates) on GEE - link to model;  
 ~~But during this process an inconsistency was found: estimate the mean value of a predictive value considering a buffer radii is not the same as estimating the value of the same layer after a "moving window" with the same radii of a buffer centroid. This could be proved by a R reproducible script simulating a random variable and estimating both scenarios, wheres each gave a different result.~~  
-![](./img/BeforeMovingWindow.png){:height="50%" width="50%"}  
-![](./img/AfterMovingWindow.png){:height="50%" width="50%"}  
+![](./img/BeforeMovingWindow.png){ width=50% }  
+![](./img/AfterMovingWindow.png){ width=50% }  
 
 ~~Although the inconsistency found,~~ the preliminary result were executed.  
 :warning: The 'inconsistency' above mentioned were discussed and were realized that:  
