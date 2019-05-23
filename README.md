@@ -8,7 +8,7 @@ Economic and Ecological Restoration Meta Analysis Project
  - [X] [First Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#First-Round-Analysis): extract dataset values for different buffer sizes around study areas;  
  - [X] [Second Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Second-Round-Analysis): as first round was done missing few datasets, the second round should be the final one and with all layers expected;
  - [X] [Workshop update](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Workshop-updates): After second round, an update was done adding more layers considering workshop commets by specialists. :warning: **Updated on 08/12/2018**  
- - [X] [Preliminar outpu](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Preliminar-Output)  
+ - [X] [Preliminar output](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Preliminar-Output)  
  - [X] [Third round](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Third-Round)  
 
 # Analysis Validation  
@@ -168,7 +168,7 @@ After back and forth to understand the issues reported on ([preliminar output](h
   * Map layout;  
 
 * Link to GEE analysis script:  
-    * [Flora script](https://code.earthengine.google.com/f9e5534f1f6c91cad8da176973ebe7fd)  
+    * [Flora script](https://code.earthengine.google.com/b5af556081a37c77a99460a1dca45da8)  
     * [Invertebrades script](https://code.earthengine.google.com/3724e23d1310fc42235bc3d36c262f17)  
     * [Vertebrades script](https://code.earthengine.google.com/be015bb15e7d41a2499de4f4db2e19e5)  
 
