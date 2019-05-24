@@ -34,7 +34,7 @@ gdalwarp -of GTiff -srcnodata 0 -multi -dstnodata 99999 -cutline /media/felipe/D
 
 
 # Flora
-gdal_merge.py -of GTiff -o /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/4thRound/StrictlyMerged.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/4thRound/AsiaOceania_strictlyProtectedRaster.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/4thRound/AfricaAsia_strictlyProtectedRaster.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/4thRound/America_strictlyProtectedRaster.tif
+gdalwarp -of GTiff -srcnodata 0 -multi -dstnodata 99999 -cutline /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/StudyArea.kml -crop_to_cutline -overwrite /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Flora/OceaniaFloraResults.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Flora/AfricaFloraResults.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Flora/AmericaFloraResults.tif  /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Flora/FloraMerged.tif
 
 # Orgnizing Restorable Amount
 gdalwarp -of GTiff -multi -cutline /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/StudyArea.kml -crop_to_cutline -overwrite -te -122.1189111747849978 -35.0000000000000000 180.0000000000000000 35.0000000000000000 -tr 0.00898308 -0.00898357 -dstnodata 999 /media/felipe/DATA/Repos/WorldRestorationUncertainty/GEE/1KMGlobalForest_RestAmount_alignedMergedNAMaskedForesBiomes.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/RestAmount.tif

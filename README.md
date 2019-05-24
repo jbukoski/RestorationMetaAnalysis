@@ -174,9 +174,9 @@ After back and forth to understand the issues reported on ([preliminar output](h
 
 ### Unpredictable mask  
 * [Flora](https://code.earthengine.google.com/d9c9158ac7dd32de9d6db72df465899b)  
-* [Invertebrades]()  
-* [Vertebrades]()  
-  
+* [Invertebrades](https://code.earthengine.google.com/9999960fb6ba8b7e4ae5a9cb8734e7c6)  
+* [Vertebrades](https://code.earthengine.google.com/15da4aaec17e761e57d192dfaf9d92e4)  
+
 ### 3rd Round Statistics Results  
   :arrow_double_down: [Flora](https://felipesbarros.github.io/RestorationMetaAnalysis/R/LandscapeVarBiomes_Flora.csv)  
   :arrow_double_down: [Invertebrates](https://felipesbarros.github.io/RestorationMetaAnalysis/R/LandscapeVarBiomes_Invertebrates.csv)  
