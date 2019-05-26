@@ -13,8 +13,11 @@ r.restAmount <- raster("./3rdRoundResult/RestAmount.tif")
 compareRaster(r.restAmount, r.vert, res = T, orig = T)
 
 # Loading invertebrates results
-r.invert <- raster("./3rdRoundResult/Invertebrades/InvertebradesMerged.tif")
-# overlay(r.invert, r.restAmount, filename= "./3rdRoundResult/InvertedWeighted.tif", fun = function(x,y){return(x*y)})
+#r.invert <- raster("./3rdRoundResult/Invertebrades/InvertebradesMerged.tif")
+r.invert <- raster("./3rdRoundResult/Invertebrades/InvertebradesMergedMasked.tif")
+#invertMask <- raster("./3rdRoundResult/Mask/Invert_NotAnalysed.tif")
+#mask(r.invert, invertMask, inverse = T, "./3rdRoundResult/Invertebrades/InvertebradesMergedMasked.tif", overwrite = TRUE)
+# overlay(r.invert, r.restAmount, filename= "./3rdRoundResult/InvertedWeighted.tif", fun = function(x,y){return(x*y)}, overwrite = TRUE)
 r.invert2 <- raster("./3rdRoundResult/InvertedWeighted.tif")
 plot(r.invert2, maxpixels=10000)
 
@@ -24,10 +27,13 @@ r.vert2 <- raster("./3rdRoundResult/VertedWeighted.tif")
 # plot(r.vert2, maxpixels=10000)
 
 # Loading invertebrates results
-r.flora <- raster("./3rdRoundResult/Flora/FloraMerged2Norm.tif")
+#r.flora <- raster("./3rdRoundResult/Flora/FloraMerged2Norm.tif")
 # raster with no max value. to solve this problem:
 #r.flora <- calc(FloraRaster, fun = function(x){x*1})
 #writeRaster(r.flora, "./3rdRoundResult/Flora/FloraMerged2Mod.tif", overwrite =  T)
+r.flora <- raster("./3rdRoundResult/Invertebrades/InvertebradesMergedMasked.tif")
+#floraMask <- raster("./3rdRoundResult/Mask/Flora_NotAnalysed.tif")
+#mask(r.flora, floraMask, inverse = T, "./3rdRoundResult/Invertebrades/FloraMergedMasked.tif")
 # overlay(r.flora, r.restAmount, filename= "./3rdRoundResult/FloraWeighted.tif", fun = function(x,y){return(x*y)}, overwrite = TRUE)
 r.flora2 <- raster("./3rdRoundResult/FloraWeighted.tif")
 plot(r.flora2, maxpixels=10000)
