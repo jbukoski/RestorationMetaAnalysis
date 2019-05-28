@@ -21,19 +21,22 @@ r.invert <- raster("./3rdRoundResult/Invertebrades/InvertebradesMergedMasked.tif
 r.invert2 <- raster("./3rdRoundResult/InvertedWeighted.tif")
 plot(r.invert2, maxpixels=10000)
 
-r.vert <- raster("./3rdRoundResult/Vertebrades/VertebradesMerged.tif")
-# overlay(r.vert, r.restAmount, filename= "./3rdRoundResult/VertedWeighted.tif", fun = function(x,y){return(x*y)})
+#r.vert <- raster("./3rdRoundResult/Vertebrades/VertebradesMerged.tif")
+r.vert <- raster("./3rdRoundResult/Vertebrades/VertebradesMergedMasked.tif")
+#vertMask <- raster("./3rdRoundResult/Mask/Vert_NotAnalysed.tif")
+#mask(r.vert, vertMask, inverse = T, "./3rdRoundResult/Vertebrades/VertebradesMergedMasked.tif", overwrite = TRUE)
+# overlay(r.vert, r.restAmount, filename= "./3rdRoundResult/VertedWeighted.tif", fun = function(x,y){return(x*y)}, overwrite = TRUE)
 r.vert2 <- raster("./3rdRoundResult/VertedWeighted.tif")
 # plot(r.vert2, maxpixels=10000)
 
-# Loading invertebrates results
+# Loading Flora results
 #r.flora <- raster("./3rdRoundResult/Flora/FloraMerged2Norm.tif")
 # raster with no max value. to solve this problem:
 #r.flora <- calc(FloraRaster, fun = function(x){x*1})
 #writeRaster(r.flora, "./3rdRoundResult/Flora/FloraMerged2Mod.tif", overwrite =  T)
-r.flora <- raster("./3rdRoundResult/Invertebrades/InvertebradesMergedMasked.tif")
+r.flora <- raster("./3rdRoundResult/Flora/FloraMergedMasked.tif")
 #floraMask <- raster("./3rdRoundResult/Mask/Flora_NotAnalysed.tif")
-#mask(r.flora, floraMask, inverse = T, "./3rdRoundResult/Invertebrades/FloraMergedMasked.tif")
+#mask(r.flora, floraMask, inverse = T, "./3rdRoundResult/Flora/FloraMergedMasked.tif", overwrite = TRUE)
 # overlay(r.flora, r.restAmount, filename= "./3rdRoundResult/FloraWeighted.tif", fun = function(x,y){return(x*y)}, overwrite = TRUE)
 r.flora2 <- raster("./3rdRoundResult/FloraWeighted.tif")
 plot(r.flora2, maxpixels=10000)
@@ -274,6 +277,9 @@ max(Flora$value, na.rm = T)
 max(Flora$count, na.rm = T)
 
 Vert <- Vert %>% mutate(zone = as.numeric(zone))
+Invert <- Invert %>% mutate(zone = as.numeric(zone))
+Flora <- Flora %>% mutate(zone = as.numeric(zone))
+
 allLscapeVar <- bind_rows(Vert, Invert, Flora)
 
 # LandscapeVar weighted NOT USED ----
@@ -302,7 +308,9 @@ library(ggplot2)
 
 # Landscape Variation ----
 # identifying if flora is fine
-allLscapeVar %>% filter(zone %in% c(1:3)) %>% group_by(class, group) %>% summarise(mean = mean(value), sd = sd(value))
+biomeStats <- allLscapeVar %>% filter(zone %in% c(1:3)) %>% group_by(class, group) %>% summarise(mean = mean(value), sd = sd(value)) 
+ungroup(biomeStats)
+write_csv(biomeStats, "./BiomeStats.csv")
 allLscapeVar %>% filter(zone %in% c(1:3)) %>% ggplot(aes(x = value, group = group, color = group, fill = group)) + geom_density(alpha = 0.5) + facet_wrap(.~class) + theme_bw()
 ggsave("LandscapeVar.png")
 
