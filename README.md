@@ -111,8 +111,8 @@ Wokshop held in Rio de JAneiro - IIS on 29/10/2018
     * govrnce = governance  
     Government Effectiveness captures perceptions of the quality of public services, the quality of the civil service and the degree of its independence from political pressures, the quality of policy formulation and implementation, and the credibility of the government's commitment to such policies
 * [Migration]  
-    * deltaGHSL9015:  Migration estimated from [GHSL: Global Human Settlement Layers](http://ghsl.jrc.ec.europa.eu/ghs_pop.php)   
-    * deltaGPWCount0010: [GPWv4: Population Count](https://doi.org/10.7927/H4X63JVC)  
+    * deltaGHSL9015 [1990 - 2015]:  Migration estimated from [GHSL: Global Human Settlement Layers](http://ghsl.jrc.ec.europa.eu/ghs_pop.php)   
+    * deltaGPWCount0010 [2000 - 2010]: [GPWv4: Population Count](https://doi.org/10.7927/H4X63JVC)  
     * deltaGPWDensity0010: Migration estimated from [GPWv4: Population Density](https://doi.org/10.7927/H4NP22DQ)  
 * [WDPA: World Database on Protected Areas](http://pp-import-production.s3.amazonaws.com/WDPA_Manual_1_5.pdf):  
     * strictlyPA: Strictly Protected Areas  
