@@ -8,20 +8,15 @@ gdal_rasterize [-b band]* [-i] [-at]
              CInt16/CInt32/CFloat32/CFloat64}] [-q]
        <src_datasource> <dst_filename>
 
-## 1. Organizing som input layers
+## 1. Organizing some input layers
 # converting *.shp file to *.tif 
 # Biomes
 gdal_rasterize -at -burn 1 -a_nodata -999 -ot 'Byte' -te -180.0000000 -60.0000000 180.0000000 90.0000000 -tr 0.00833333 -0.00833333 -l  wwf_terr_ecos wwf_terr_ecos.shp -where  'BIOME in (1,2,3,4,5)' -of GTiff forestAreas.tif
 
 # Governance
-gdal_rasterize -at -a Men9610 -a_nodata -999 -te -180.0000000 -60.0000000 180.0000000 90.0000000 -tr 0.00296338 -0.00296341 -l  GovernancePolygon GovernancePolygon.shp -of GTiff GovernancePolygon.tif
+gdal_rasterize -at -a Govnce9610 -a_nodata -999 -te -179.9999995223580811 -72.3196438006479099 179.9977664918468747 85.0728813559317558 -tr 0.02 -0.02 -ot Float32 -l  Governance /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/Governance/Governance.shp -of GTiff /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Data/Governance/GovernanceF32.tif
 
-gdal_rasterize -at -a Men9610 -a_nodata -999 -te -179.9999995223580811 -72.3196438006479099 179.9977664918468747 85.0728813559317558 -tr 0.00296338 -0.00296341 -l  GovernancePolygon GovernancePolygon.shp -of GTiff GovernancePolygon.tif
-
-gdal_rasterize -at -a GovMean961 -a_nodata -999 -te -179.9999995223580811 -72.3196438006479099 179.9977664918468747 85.0728813559317558 -tr 0.008333330000000 -0.008333330000000 -l  GovernancePolygon GovernancePolygon.shp -of GTiff GovernancePolygon.tif
-
-
-## 2. Not predictable mask layer
+## 2. Not predictable mask Float32layer
 # Invert
 gdalwarp -of GTiff -srcnodata 0 -multi -dstnodata 255 -cutline /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/StudyArea.kml -crop_to_cutline -overwrite /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Mask/Oceania_NotAnalysedInvert.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Mask/America_NotAnalysedInvert.tif /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Mask/Africa_NotAnalysedInvert.tif  /media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/R/3rdRoundResult/Mask/Invert_NotAnalysed.tif
 

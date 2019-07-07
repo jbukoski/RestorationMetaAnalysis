@@ -4,19 +4,27 @@ Economic and Ecological Restoration Meta Analysis Project
 
 **General information:**  
 
+#### :warning: Abour the analysis rounds:  
+**Due to inconsistencies on the process a "fourth round" were done, changing the analysis structures, which were until that point linear, passing on each analysis round, and now all analysis is done in one unique process: the [fourth round](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Fourth-Round)**  
  - [X] [Analysis validation](https://github.com/FelipeSBarros/RestorationMetaAnalysis#analysis-validation): Reproduce the same analysis done in Google Earth Engine on R to check the if results match;  
- - [X] [First Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#First-Round-Analysis): extract dataset values for different buffer sizes around study areas;  
- - [X] [Second Round Analysis](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Second-Round-Analysis): as first round was done missing few datasets, the second round should be the final one and with all layers expected;
- - [X] [Workshop update](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Workshop-updates): After second round, an update was done adding more layers considering workshop commets by specialists. :warning: **Updated on 08/12/2018**  
- - [X] [Preliminar output](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Preliminar-Output)  
- - [X] [Third round](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Third-Round)  
+ - [X] [~~First Round Analysis~~](https://github.com/FelipeSBarros/RestorationMetaAnalysis#First-Round-Analysis): extract dataset values for different buffer sizes around study areas;  
+ - [X] [~~Second Round Analysis~~](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Second-Round-Analysis): as first round was done missing few datasets, the second round should be the final one and with all layers expected;
+ - [X] [~~Workshop update~~](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Workshop-updates): After second round, an update was done adding more layers considering workshop commets by specialists. :warning: **Updated on 08/12/2018**  
+ - [X] [~~Preliminar output~~](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Preliminar-Output)  
+ - [X] [~~Third round~~](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Third-Round)  
+ - [X] [Fourth round - Revision](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Fourth-Round)  
 
 # Analysis Validation  
 
 To certify all analysis have been done correctly, a random study site was selected to run same analysis using R stats.
 For results, [click here](https://felipesbarros.github.io/RestorationMetaAnalysis/R/AnalysisValidation.html)  
 
-# First Round Analysis
+Another validation was done to confirm if focal kenrel were done considering de pixel centroid:
+A variable was selectect and sampled its values for a points. With the same point we sampled the pixel value after a focal kernel with radius equals the pixel size. As the result was the same, qe qill disconsider the radius for the focal kernel with the same pixel size.
+
+[GEE script](https://code.earthengine.google.com/3f54b3bd1eee02f061045fc3b4a45b16)  
+
+# First Round Analysis (desconsider)
 
 The statistics used for Ecological data where *mean* (\*_mean) and *standard deviation* (\*_stdDev);
 The dataset were composed by:
@@ -39,25 +47,25 @@ The dataset were composed by:
 * Opportunity Cost  
   * **OppCost** = Created by
 * [ESA Globe Cover](http://due.esrin.esa.int/page_globcover.php)  
-  * Urban Areas 2009
+  * **UrbArea2019** = Urban Areas 2009  
 
 [Link to GEE analysis script](https://code.earthengine.google.com/d180ea0cdd8d61de0880a2ef0a297422)
 
-### 1st Round Results  
- :arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer5.csv)  
- :arrow_double_down: [Buffer 10Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer10.csv)  
- :arrow_double_down: [Buffer 25Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer25.csv)  
- :arrow_double_down: [Buffer 50Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer50.csv)  
- :arrow_double_down: [Buffer 100Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer100.csv)  
+### 1st Round Results  (desconsider)
+ :arrow_double_down: [~~Buffer 5Km~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer5.csv)  
+ :arrow_double_down: [~~Buffer 10Km~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer10.csv)  
+ :arrow_double_down: [~~Buffer 25Km~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer25.csv)  
+ :arrow_double_down: [~~Buffer 50Km~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer50.csv)  
+ :arrow_double_down: [~~Buffer 100Km~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/results_Buffer100.csv)  
 
-# Second Round Analysis
+# Second Round Analysis (desconsider)  
 
  where added to the analysis the variables:
 
  * [Human Foot Print](http://sedac.ciesin.columbia.edu/data/set/wildareas-v2-human-footprint-geographic)  
     * **HFPrint** = 1995 - 2004
  * [Urban Area - ESA Globe Cover](http://due.esrin.esa.int/page_globcover.php)  
-    * **PercUrbArea** = 2009  
+    * **PercUrbArea09** = Percentual de area urbana 2009  
  * [Rural poverty distribution](http://www.ciesin.columbia.edu/povmap/ds_global.html)  
     *   **RuralPvty** = ?  
   *This layer had its pixels with negative values (e.g. -998) reclasifyed to 0 as it seems to be indicating nodata areas = Urban Area*;
@@ -87,9 +95,11 @@ Wokshop held in Rio de JAneiro - IIS on 29/10/2018
     * **BAI1317** = mean BAI value between 2013 - 2017  
 * [CropLands](https://geography.wr.usgs.gov/science/croplands/
 )  
-    * **CropLands** = Percentage of cropland;
+    * **CropLands** = crop/non cropland;  
 * [Croplands & Pastures](http://sedac.ciesin.columbia.edu/data/set/aglands-pastures-2000)  
-    * **PastAgric** = Percentage of cropland OR agriculture;
+    * **PastAgric** = Percentage of cropland OR agriculture;  
+:warning: Seems to be wrong. As the link shows, the layer is just for pasture;  
+
 * [Elevation SRTM 30m](https://lpdaac.usgs.gov/sites/default/files/public/measures/docs/SRTM%20Quick%20Guide.pdf)  
     * **Elevation** = mean elevation in meters;
 * [Slope](https://developers.google.com/earth-engine/api_docs#eeterrainslope)  
@@ -130,11 +140,11 @@ Wokshop held in Rio de JAneiro - IIS on 29/10/2018
  [Link to GEE analysis script](https://code.earthengine.google.com/c64a926e7f0958f9522beb30ec4702fa)
 
 ### 2nd Round [workshop] Results  
-  :arrow_double_down: [Buffer 5Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer5.csv)  
-  :arrow_double_down: [Buffer 10Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer10.csv)  
-  :arrow_double_down: [Buffer 25Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer25.csv)  
-  :arrow_double_down: [Buffer 50Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer50.csv)  
-  :arrow_double_down: [Buffer 100Km](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer100.csv)  
+  :arrow_double_down: [~~Buffer 5Km~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer5.csv)  
+  :arrow_double_down: [~~Buffer 10Km~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer10.csv)  
+  :arrow_double_down: [~~Buffer 25Km~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer25.csv)  
+  :arrow_double_down: [~~Buffer 50Km~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer50.csv)  
+  :arrow_double_down: [~~Buffer 100Km~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/2ndRound_results_Buffer100.csv)  
 
 # Preliminar Output  
 After predictive selection done using randomForest algorithm on R, a preliminar predictive of the Landscape Variation were ran by biodiversity group (i.e. flora, vertebrates and invertebrates) on GEE - link to model;  
@@ -154,7 +164,7 @@ focal(striclyPA, kernel, "sum", na.rm=TRUE) / sum(kernel)
 
 Thus the process to be run will all be done in GEE;  
 
-# Third Round  
+# Third Round (desconsider)  
 ~~As a inconsistency was found ([read above](https://github.com/FelipeSBarros/RestorationMetaAnalysis#Preliminar-Output)) this round aimed to get the predictive values of all points for each biodiversity group after running the "moving windows".~~  
 
 ~~[Link to GEE analysis script](https://code.earthengine.google.com/a387060663977d668e2a6e37f819c758)~~  
@@ -168,19 +178,52 @@ After back and forth to understand the issues reported on ([preliminar output](h
   * Map layout;  
 
 * Link to GEE analysis script:  
-    * [Flora script](https://code.earthengine.google.com/b5af556081a37c77a99460a1dca45da8)  
-    * [Invertebrades script](https://code.earthengine.google.com/3724e23d1310fc42235bc3d36c262f17)  
-    * [Vertebrades script](https://code.earthengine.google.com/be015bb15e7d41a2499de4f4db2e19e5)  
+    * [~~Flora script~~](https://code.earthengine.google.com/b5af556081a37c77a99460a1dca45da8)  
+    * [~~Invertebrades script~~](https://code.earthengine.google.com/3724e23d1310fc42235bc3d36c262f17)  
+    * [~~Vertebrades script~~](https://code.earthengine.google.com/be015bb15e7d41a2499de4f4db2e19e5)  
 
-### Unpredictable mask  
-* [Flora](https://code.earthengine.google.com/68b19aeab30909fbce9d2ff6ec27b02a)  
-* [Invertebrades](https://code.earthengine.google.com/9999960fb6ba8b7e4ae5a9cb8734e7c6)  
-* [Vertebrades](https://code.earthengine.google.com/8b992d5ea994068960269dd09f957e6c)  
+### Unpredictable mask (desconsider)  
+* [~~Flora~~](https://code.earthengine.google.com/68b19aeab30909fbce9d2ff6ec27b02a)  
+* [~~Invertebrades~~](https://code.earthengine.google.com/9999960fb6ba8b7e4ae5a9cb8734e7c6)  
+* [~~Vertebrades~~](https://code.earthengine.google.com/8b992d5ea994068960269dd09f957e6c)  
 
-### 3rd Round Statistics Results  
-  :arrow_double_down: [Flora](https://felipesbarros.github.io/RestorationMetaAnalysis/R/LandscapeVarBiomes_Flora.csv)  
-  :arrow_double_down: [Invertebrates](https://felipesbarros.github.io/RestorationMetaAnalysis/R/LandscapeVarBiomes_Invertebrates.csv)  
-  :arrow_double_down: [Vertebrates](https://felipesbarros.github.io/RestorationMetaAnalysis/R/LandscapeVarBiomes_Vertebrates.csv)  
+### 3rd Round Statistics Results (desconsider)  
+  :arrow_double_down: [~~Flora~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/LandscapeVarBiomes_Flora.csv)  
+  :arrow_double_down: [~~Invertebrates~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/LandscapeVarBiomes_Invertebrates.csv)  
+  :arrow_double_down: [~~Vertebrates~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/LandscapeVarBiomes_Vertebrates.csv)  
+
+# Fourth Round:  
+All process were done in **GEE**. The script can be found {here}(https://code.earthengine.google.com/2cc66e95c00c73d0785e66f0d9107d55);
+During the validation process, few changes occured:  
+
+1. Layers with orignal resolution lower than 1Km had to be resampled to 1Km so GEE could afford all focal radius (see below a list of those layers);
+1. We are estimating only urban areas from [Globe Cover](http://due.esrin.esa.int/page_globcover.php). The ESA layer presented problem during the process;  
+1. The Opportunity Cost layer had to be unmasked. So, non restorable sites present 0 opportunitycost; Also we added a sum of Opportunity Cost.  
+1. Pasture layer where removed due conceptual inconsistency.  
+1. Sustainabile Protected Area. had problem on estimation.  
+
+**Layers with rasolution lower than 1Km:**  
+
+**30 m**
+* grossdef  
+* slope  
+* yearMeanUntil10  
+* f2003  
+* Elevation  
+* treeCover  
+
+**250 m**  
+* deltaGHSL9015  
+
+**300 m**  
+* cropIIS  
+* pastoIIS  
+* CropPastoIIS  
+* UrbCover  
+
+**500 m**  
+* MeanNPP0010  
+* NPP03  
 
 
 # Scripts  

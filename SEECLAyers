@@ -1,0 +1,77 @@
+// 30 m
+# grossdef
+# slope
+# yearMeanUntil10
+# f2003
+# Elevation
+# treeCover
+
+// 250 m 
+# deltaGHSL9015
+
+//300 m
+# cropIIS
+# pastoIIS
+# CropPastoIIS
+# UrbCover
+// ESAUrbanArea
+/*Map.addLayer(ESAUrbanArea, {}, "ESAUrbanArea")
+print(ESAUrbanArea)
+var ESAUrbanArea = ESAUrbanArea.select(
+  ['landcover'],
+  ['UrbanArea']).reproject(Proj1km);
+var samples = kernelStack(ESAUrbanArea, samples);
+print(samples)*/
+
+// 500m
+# MeanNPP0010
+# NPP03
+
+// 1km
+# strictlyProtectedRaster
+# deltaGPWCount0010
+# deltaGPWDensity0010
+# meanTmp
+# sand
+# phikcl
+# phihox
+# bulkdensity
+# CropLands
+# HumanFootPrint
+# cec
+# MeanPrec (YrlPrec)
+# DriestQuartes
+# PrecSeanslty
+# PrecSeanslty
+# Governance //added new layer
+# IISOpCostM //unmasked 
+# IISOpCostM SUM // added sum of oppcost
+// SustainableProtectedRaster Dando Timeout
+
+// 5 km
+# RuralPoverty
+# MeanDef8910
+# MeanDef03
+# MeanDef99
+
+// 10 km
+# cdd
+# sa
+# fty
+# wfire
+# urb
+# CropPastures
+// pasture Removed due inconsistency
+# IDH03
+# IDH9010
+# RuralPopDist
+# TotalRoadDensity
+# T1RoadDensity
+# T2RoadDensity
+# T3RoadDensity
+# T4RoadDensity
+# T5RoadDensity
+
+// 100Km
+# NBR1317
+# BAI1317
