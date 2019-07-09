@@ -193,10 +193,11 @@ After back and forth to understand the issues reported on ([preliminar output](h
   :arrow_double_down: [~~Vertebrates~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/LandscapeVarBiomes_Vertebrates.csv)  
 
 # Fourth Round:  
-All process were done in **GEE**. The script can be found {here}(https://code.earthengine.google.com/2cc66e95c00c73d0785e66f0d9107d55);
+All process were done in **GEE**. The script can be found {here}(https://code.earthengine.google.com/2e68232c4d3e6904505ba0eb54a9f017);
 During the validation process, few changes occured:  
 
-1. Layers with orignal resolution lower than 1Km had to be resampled to 1Km so GEE could afford all focal radius (see below a list of those layers);
+1. Study site 181 was descinsidered due its location doesn't fit the layer resolution;  
+1. Layers with orignal resolution lower than 1Km had to be resampled to 1Km so GEE could afford all focal radius (see below a list of those layers);  
 1. We are estimating only urban areas from [Globe Cover](http://due.esrin.esa.int/page_globcover.php). The ESA layer presented problem during the process;  
 1. The Opportunity Cost layer had to be unmasked. So, non restorable sites present 0 opportunitycost; Also we added a sum of Opportunity Cost.  
 1. Pasture layer where removed due conceptual inconsistency.  
