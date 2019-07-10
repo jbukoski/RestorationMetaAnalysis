@@ -203,6 +203,9 @@ During the validation process, few changes occured:
 1. Pasture layer where removed due conceptual inconsistency.  
 1. Sustainabile Protected Area. had problem on estimation.  
 
+### 4th Round Statistics Results
+  :arrow_double_down: [All groups](https://felipesbarros.github.io/RestorationMetaAnalysis/Data/results/Biodiversity_Revision.csv)    
+
 **Layers with rasolution lower than 1Km:**  
 
 **30 m**
