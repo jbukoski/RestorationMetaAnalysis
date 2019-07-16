@@ -193,7 +193,7 @@ After back and forth to understand the issues reported on ([preliminar output](h
   :arrow_double_down: [~~Vertebrates~~](https://felipesbarros.github.io/RestorationMetaAnalysis/R/LandscapeVarBiomes_Vertebrates.csv)  
 
 # Fourth Round:  
-All process were done in **GEE**. The script can be found [here](https://code.earthengine.google.com/7c5f72b90d9104ab7c42fb6698a6ae97);
+All process were done in **GEE**. The script can be found [here](https://code.earthengine.google.com/c64977db5355dadea8a4a01be5cc98d5);
 During the validation process, few changes occured:  
 
 1. Study site 181 was descinsidered due its location doesn't fit the layer resolution;  
