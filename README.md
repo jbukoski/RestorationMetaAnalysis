@@ -66,9 +66,10 @@ The dataset were composed by:
     * **HFPrint** = 1995 - 2004
  * [Urban Area - ESA Globe Cover](http://due.esrin.esa.int/page_globcover.php)  
     * **PercUrbArea09** = Percentual de area urbana 2009  
- * [Rural poverty distribution](http://www.ciesin.columbia.edu/povmap/ds_global.html)  
+ * [Rural poverty distribution](http://www.fao.org/geonetwork/srv/en/main.home#)  
     *   **RuralPvty** = ?  
-  *This layer had its pixels with negative values (e.g. -998) reclasifyed to 0 as it seems to be indicating nodata areas = Urban Area*;
+  :warning: *Search for "Global distribution of rural poor population" on the search window*;
+  :warning: *This layer had its pixels with negative values (e.g. -998) reclasifyed to 0 as it seems to be indicating nodata areas = Urban Area*;
  * [ Rural population distribution (persons per pixel), 2000 (FGGD)](http://www.fao.org:80/geonetwork/srv/en/resources.get?id=14031&fname=Map_2_1.zip&access=private)  
     * **RuralPop** = 2007  
  * [ Hansen tree cover](http://earthenginepartners.appspot.com/science-2013-global-forest)  
