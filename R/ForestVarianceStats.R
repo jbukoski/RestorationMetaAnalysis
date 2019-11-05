@@ -4,13 +4,13 @@ library(tidyverse)
 
 ## Loading datasets ----
 # country data
-country <- read_sf("../Data/Countries_original.shp") %>% st_drop_geometry() %>%  dplyr::select("ID_Country", "CNTRY_NAME")
-r.countries <- raster("../Data/CountriesRaster.tif")
+country <- read_sf("../Data/Vector/Countries_original.shp") %>% st_drop_geometry() %>%  dplyr::select("ID_Country", "CNTRY_NAME")
+r.countries <- raster("../Data/Raster/CountriesRaster.tif")
 # biome data
-biome <- read_sf("../Data/Ecoregions2017/Ecoregions2017.shp") %>% st_drop_geometry() %>%  dplyr::select("Biome_ID", "BIOME_NAME")
-r.biomes <- raster("../Data/ForestBiomesRaster.tif")
-r.restAmount <- raster("./3rdRoundResult/RestAmount.tif")
-compareRaster(r.restAmount, r.vert, res = T, orig = T)
+biome <- read_sf("../Data/Vector/Ecoregions2017/Ecoregions2017.shp") %>% st_drop_geometry() %>%  dplyr::select("Biome_ID", "BIOME_NAME")
+r.biomes <- raster("../Data/Raster/ForestBiomesRaster.tif")
+#r.restAmount <- raster("../Data/Raster/Results/RestAmount.tif")
+#compareRaster(r.restAmount, r.vert, res = T, orig = T)
 
 # Loading invertebrates results
 #r.invert <- raster("./3rdRoundResult/Invertebrades/InvertebradesMerged.tif")

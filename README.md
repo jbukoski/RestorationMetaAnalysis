@@ -188,6 +188,11 @@ During the validation process, few changes occured:
 * **Link to GEE script:**  
   * [Forest areas mask](https://code.earthengine.google.com/46c4b6bd5aa852863ac4fc2948fc0039)  
 
+## Pos processing  
+1. Download results;
+1. [Mosailing results]('./R/ResulsMosaicking.R');  
+1. []()  
+
 ## Scripts  
 
 ### R  
