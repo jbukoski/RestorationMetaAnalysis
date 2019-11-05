@@ -176,16 +176,17 @@ During the validation process, few changes occured:
 * NPP03  
 
 ### Spatial prediction
-* Flora:  
-  * [Flora Richness - Link to GEE spatial prediction script](https://code.earthengine.google.com/82f889dd9e8588bfa4dff6e86569a3ba)  
-  * [Flora Abundance - link to GEE spatial prediction]()  
-  * [Vertebrates Richness - link to GEE spatial prediction]()  
-  * [Vertebrates Abundance - link to GEE spatial prediction]()  
-  * [Invertebrates Richness - link to GEE spatial prediction]()  
-  * [Invertebrates Abundance - link to GEE spatial prediction]()  
+* **link to GEE spatial prediction:**  
+  * [Flora Richness](https://code.earthengine.google.com/e4d289505de033acd383b5cf8c96fc62)  
+  * [Flora Abundance](https://code.earthengine.google.com/da28b90248b8c4b9a4d2a2c52df7ec47)  
+  * [Vertebrates Richness]()  
+  * [Vertebrates Abundance]()  
+  * [Invertebrates Richness]()  
+  * [Invertebrates Abundance]()  
 
 ### Forest Areas [Mask]  
-* [Forest areas mask - Link to GEE script](https://code.earthengine.google.com/46c4b6bd5aa852863ac4fc2948fc0039)  
+* **Link to GEE script:**  
+  * [Forest areas mask](https://code.earthengine.google.com/46c4b6bd5aa852863ac4fc2948fc0039)  
 
 ## Scripts  
 
