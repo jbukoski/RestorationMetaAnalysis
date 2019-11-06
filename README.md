@@ -190,8 +190,9 @@ During the validation process, few changes occured:
 
 ## Pos processing  
 1. Download results;
+1. [Biomes and Countries data preparation]('./R/DataRasterization.R');  
 1. [Mosailing results]('./R/ResulsMosaicking.R');  
-1. []()  
+1. [Variation analysis](LandScapeVariationAnalysis.R)  
 
 ## Scripts  
 
