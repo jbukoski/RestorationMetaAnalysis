@@ -177,7 +177,7 @@ During the validation process, few changes occured:
 
 ### Spatial prediction
 * **link to GEE spatial prediction:**  
-  * [Flora Richness](https://code.earthengine.google.com/9d6647e79e1bbbbe152fd64b45b5c9dd)  
+  * [Flora Richness](https://code.earthengine.google.com/39f623316c64f89cb1c99ab6a016ed77)  
   * [Flora Abundance](https://code.earthengine.google.com/da28b90248b8c4b9a4d2a2c52df7ec47)  
   * [Vertebrates Richness]()  
   * [Vertebrates Abundance]()  
@@ -186,7 +186,7 @@ During the validation process, few changes occured:
 
 ### Forest Areas [Mask]  
 * **Link to GEE script:**  
-  * [Forest areas mask & Restoration amount](https://code.earthengine.google.com/162365f972be1fafcc88c758e829255c)  
+  * [Forest areas mask & Restoration amount](https://code.earthengine.google.com/795f4a83d3b861e12ce51f05f51f1a0c)  
 
 > **Para que saibam:**
 Os valores de variação da paisagem estão sendo calculados da seguintre forma:
