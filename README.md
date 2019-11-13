@@ -178,7 +178,7 @@ During the validation process, few changes occured:
 ### Spatial prediction
 * **link to GEE spatial prediction:**  
   * [Flora Richness](https://code.earthengine.google.com/39f623316c64f89cb1c99ab6a016ed77)  
-  * [Flora Abundance](https://code.earthengine.google.com/da28b90248b8c4b9a4d2a2c52df7ec47)  
+  * [Flora Abundance](https://code.earthengine.google.com/a49144cdf0fd39547a92c886129f16a1)  
   * [Vertebrates Richness]()  
   * [Vertebrates Abundance]()  
   * [Invertebrates Richness]()  
