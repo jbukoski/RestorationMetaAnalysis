@@ -24,7 +24,7 @@ for (folder in grupos){
     cat("Mosaicking", name, "\n")
     gdalwarp(
       srcfile = list.files(folder, 
-                           pattern = "Prediction.tif$", 
+                           pattern = ".tif$", 
                            full.names = TRUE), 
       dstfile = paste(folder, 
                       paste0(name, "_Merged.tif"), sep = "/"), 
