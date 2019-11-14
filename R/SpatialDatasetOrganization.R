@@ -39,3 +39,20 @@ colnames(InvertAbundance)
 InvertAbundance.sf <- st_as_sf(InvertAbundance, coords = c("Longitude", "Latitude"), crs = 4326)
 plot(st_geometry(InvertAbundance.sf))
 write_sf(InvertAbundance.sf, "../Data/Vector/InvertAbundance.shp")
+
+# Vertebrados ----
+# data sent by e-mail on "ter, 29 de out 12:49" by Pablo
+
+# Richness
+VertRichness <- read_csv("../Data/CSV/Dados.RF.Vert.richness.csv") %>% 
+  select(-1)
+VertRichness.sf <- st_as_sf(VertRichness, coords = c("Longitude", "Latitude"), crs = 4326)
+plot(st_geometry(VertRichness.sf))
+write_sf(VertRichness.sf, "../Data/Vector/VertebradosRichness.shp")
+
+# Abundance
+VertAbundance <- read_csv("../Data/CSV/Dados.RF.Vert.abundance.csv") %>% select(-1) 
+colnames(VertAbundance)
+VertAbundance.sf <- st_as_sf(VertAbundance, coords = c("Longitude", "Latitude"), crs = 4326)
+plot(st_geometry(VertAbundance.sf))
+write_sf(VertAbundance.sf, "../Data/Vector/VertAbundance.shp")

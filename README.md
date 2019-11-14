@@ -178,11 +178,11 @@ During the validation process, few changes occured:
 ### Spatial prediction
 * **link to GEE spatial prediction:**  
   * [Flora Richness](https://code.earthengine.google.com/39f623316c64f89cb1c99ab6a016ed77)  
-  * [Flora Abundance](https://code.earthengine.google.com/a49144cdf0fd39547a92c886129f16a1)  
+  * [Flora Abundance](https://code.earthengine.google.com/825da0c49a6ca96b555e918850822c87)  
   * [Vertebrates Richness]()  
   * [Vertebrates Abundance]()  
-  * [Invertebrates Richness]()  
-  * [Invertebrates Abundance]()  
+  * [Invertebrates Richness](https://code.earthengine.google.com/879694c4581662d1e7f544c7fee477b7)  
+  * [Invertebrates Abundance](https://code.earthengine.google.com/ef2a3520b632c2a904e45b4f3e0dbc23)  
 
 ### Forest Areas [Mask]  
 * **Link to GEE script:**  
