@@ -1,4 +1,5 @@
 library(gdalUtils)
+library(raster)
 
 # Mosaicking according to group analysis ----
 grupos <- list.files("../Data/Raster/Results", full.names = T)
@@ -33,6 +34,28 @@ for (folder in grupos){
       cutline = studyArea, crop_to_cutline = TRUE,
       te = c(-122.1189111747849978, -35.0000000000000000, 180.0000000000000000, 35.0000000000000000), tr = c(0.00898308, -0.00898357),
       overwrite = TRUE)
+    
+    warning("Mosaic ", name, " done\n")
+    
+    # test if raster must be normailized
+    if (!grepl("OOTR|Restorable", name)){
+      r.landscape <- raster(
+        paste(folder,
+              paste0(name, "_Merged.tif"), sep = "/"))
+      
+      r.landscape <- setMinMax(r.landscape)
+      if (maxValue(r.landscape) != 1 ){
+        cat("Normalizing raster values\n")
+        r.landscape <- r.landscape/maxValue(r.landscape)
+        
+      }
+      
+      cat("Saving raster", name, "normalized \n")
+      writeRaster(r.landscape, 
+                  paste(folder,
+                        paste0(name, "_Norm.tif"), sep = "/"))
+    }
+
   }
   
 }

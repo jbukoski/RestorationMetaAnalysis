@@ -29,6 +29,7 @@ write_sf(abundance.sf, "../Data/Vector/FloraAbundance.shp")
 # Richness
 InvertRichness <- read_csv("../Data/CSV/Dados.RF.Invert.richness.csv") %>% 
   select(-1)
+colnames(InvertRichness)
 InvertRichness.sf <- st_as_sf(InvertRichness, coords = c("Longitude", "Latitude"), crs = 4326)
 plot(st_geometry(InvertRichness.sf))
 write_sf(InvertRichness.sf, "../Data/Vector/InvertebradosRichness.shp")
@@ -46,6 +47,7 @@ write_sf(InvertAbundance.sf, "../Data/Vector/InvertAbundance.shp")
 # Richness
 VertRichness <- read_csv("../Data/CSV/Dados.RF.Vert.richness.csv") %>% 
   select(-1)
+colnames(VertRichness)
 VertRichness.sf <- st_as_sf(VertRichness, coords = c("Longitude", "Latitude"), crs = 4326)
 plot(st_geometry(VertRichness.sf))
 write_sf(VertRichness.sf, "../Data/Vector/VertebradosRichness.shp")
