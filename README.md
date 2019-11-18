@@ -177,12 +177,12 @@ During the validation process, few changes occured:
 
 ### Spatial prediction
 * **link to GEE spatial prediction:**  
-  * [Flora Richness](https://code.earthengine.google.com/39f623316c64f89cb1c99ab6a016ed77)  
-  * [Flora Abundance](https://code.earthengine.google.com/825da0c49a6ca96b555e918850822c87)  
-  * [Vertebrates Richness](https://code.earthengine.google.com/5589851576dcf802fae0ee90850d9b23)  
-  * [Vertebrates Abundance](https://code.earthengine.google.com/1bba0fc9e5e4226374b412823a0d8333)  
-  * [Invertebrates Richness](https://code.earthengine.google.com/40a82a3f80ec31ecbf758f3a919bda64)  
-  * [Invertebrates Abundance](https://code.earthengine.google.com/ef2a3520b632c2a904e45b4f3e0dbc23)  
+  * [Flora Richness](https://code.earthengine.google.com/f830d47598f70855ff59df5de2a01af3)  
+  * [Flora Abundance](https://code.earthengine.google.com/6e93aab744ff40f80f4e2cef9bf45a52)  
+      * [Vertebrates Richness](https://code.earthengine.google.com/1464649ecae1b3688cdc86a6cd87f387)  
+  * [Vertebrates Abundance](https://code.earthengine.google.com/91c3c3f61bd0ea95d3cac347895a0633)  
+  * [Invertebrates Richness](https://code.earthengine.google.com/4d2016a3c75922105f3640f739b5a4e5)  
+  * [Invertebrates Abundance](https://code.earthengine.google.com/bcf1a2e14cfbb350e7f19c5877bde3ab)  
 
 ### Forest Areas [Mask]  
 * **Link to GEE script:**  
