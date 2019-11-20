@@ -18,6 +18,7 @@ png("./plots/RichnessLandscapeVariation.png")
 rasterVis::densityplot(RichnessLandscapeVarResults)
 dev.off()
 
+# Not done -----
 BiomesLayer <- raster("../Data/Raster/ForestBiomesRaster.tif")
 biomes.ref <- read_csv("/media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/Data/CSV/BiomesReference.csv")
 
