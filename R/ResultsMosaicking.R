@@ -5,6 +5,7 @@ library(tibble)
 # Mosaicking according to group analysis ----
 grupos <- list.files("../Data/Raster/Results", full.names = T)
 studyArea <- "../Data/Vector/StudyArea.shp"
+ApplyMask <- TRUE
 CalcBioVariation <- TRUE
 
 for (folder in grupos){
@@ -48,6 +49,21 @@ for (folder in grupos){
       
       r.landscape <- setMinMax(r.landscape)
       
+      # test if shuld be masked
+      if ( ApplyMask ){
+        
+        cat("Masking raster\n")
+        landscapeMask <- raster(
+          paste(paste0(folder, '_OOTR'),
+                paste0(name, "_OOTR_Merged.tif"), sep = "/"))
+        
+        r.landscape <- mask(r.landscape, landscapeMask)
+        
+        writeRaster(r.landscape, 
+                    paste(folder,
+                          paste0(name, "_Masked.tif"), sep = "/"), 
+                    overwrite = TRUE)
+      }
       # teste if raster must be normalized
       if (maxValue(r.landscape) != 1 ){
         cat("Normalizing raster values\n")
