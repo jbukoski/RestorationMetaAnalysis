@@ -7,6 +7,7 @@ grupos <- list.files("../Data/Raster/Results", full.names = T)
 studyArea <- "../Data/Vector/StudyArea.shp"
 ApplyMask <- TRUE
 CalcBioVariation <- TRUE
+#grupos <- grupos[!grepl("OOTR|Restorable", grupos)]
 
 for (folder in grupos){
   # folder <- grupos[1]
@@ -29,12 +30,12 @@ for (folder in grupos){
     cat("Mosaicking", name, "\n")
     gdalwarp(
       srcfile = list.files(folder, 
-                           pattern = ".tif$", 
+                           pattern = "Prediction.tif$", 
                            full.names = TRUE), 
       dstfile = paste(folder, 
                       paste0(name, "_Merged.tif"), sep = "/"), 
       srcnodata = 0,
-      #dstnodata = 9999,
+      #dstnodata = -9999,
       cutline = studyArea, crop_to_cutline = TRUE,
       te = c(-122.1189111747849978, -35.0000000000000000, 180.0000000000000000, 35.0000000000000000), tr = c(0.00898308, -0.00898357),
       overwrite = TRUE)
@@ -57,7 +58,7 @@ for (folder in grupos){
           paste(paste0(folder, '_OOTR'),
                 paste0(name, "_OOTR_Merged.tif"), sep = "/"))
         
-        r.landscape <- mask(r.landscape, landscapeMask)
+        r.landscape <- mask(r.landscape, landscapeMask, inverse = TRUE)
         
         writeRaster(r.landscape, 
                     paste(folder,
@@ -66,6 +67,7 @@ for (folder in grupos){
       }
       # teste if raster must be normalized
       if (maxValue(r.landscape) != 1 ){
+      
         cat("Normalizing raster values\n")
         r.landscape <- r.landscape/maxValue(r.landscape)
         
@@ -82,3 +84,4 @@ for (folder in grupos){
   }
   
 }
+
