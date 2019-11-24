@@ -5,7 +5,7 @@ library(tibble)
 # Mosaicking according to group analysis ----
 grupos <- list.files("../Data/Raster/Results", full.names = T)
 studyArea <- "../Data/Vector/StudyArea.shp"
-ApplyMask <- TRUE
+ApplyMask <- FALSE
 CalcBioVariation <- TRUE
 #grupos <- grupos[!grepl("OOTR|Restorable", grupos)]
 
@@ -22,7 +22,7 @@ for (folder in grupos){
   if (
     length(list.files(
     folder,  pattern = "Merged.tif$", full.names = T)) != 0){
-    overwriteResult <- readline(prompt = paste("File", name,"already exists. Overwrite? \n T/F: "))
+    #overwriteResult <- readline(prompt = paste("File", name,"already exists. Overwrite? \n T/F: "))
   }
   
   # in case it exists and should be overwritten:
