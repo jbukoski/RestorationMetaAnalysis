@@ -188,13 +188,17 @@ During the validation process, few changes occured:
 * **Link to GEE script:**  
   * [Forest areas mask & Restoration amount](https://code.earthengine.google.com/795f4a83d3b861e12ce51f05f51f1a0c)  
 
-> **Para que saibam:**
+> ~~**Para que saibam:**
 Os valores de variação da paisagem estão sendo calculados da seguintre forma:
 Após a predição espacial, é mascarada pelas áreas florestais e restauráveis. 
 Os valores remanescentes são, então, multiplicados (ponderados) pela quantidade de **área restaurável**. 
 Esse dado de **área restaurável** representa o quanto o pixel precisa para chegar a 100% de densidade de cobertura florestal (hansen) multiplicado pela área do pixel.  
 > **Exemplo:** Um pixel com 0 de cobertura florestal, precisa restaurar tudo para chegar a 100 (na verdade, 1), logo terá valor 1; Esse valor com a quatidade a ser restaurado foi multiplicado pela área do pixel em questão.  
-Ou seja, além da densidade de conbertura florestal estamos trabalhando com a área a ser restaurada para chegar aos 100% de cobertura.  
+Ou seja, além da densidade de conbertura florestal estamos trabalhando com a área a ser restaurada para chegar aos 100% de cobertura.~~  
+
+## Final map  
+
+![](./mapas/MapaFinal.png)  
 
 ## Pos processing  
 1. Download results;

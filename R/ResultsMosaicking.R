@@ -8,7 +8,7 @@ studyArea <- "../Data/Vector/StudyArea.shp"
 ApplyMask <- FALSE
 CalcBioVariation <- TRUE
 #grupos <- grupos[!grepl("OOTR|Restorable", grupos)]
-grupos <- grupos[c(1,2)]
+grupos <- grupos[-c(9,8)]
 for (folder in grupos){
   # folder <- grupos[1]
   
@@ -30,7 +30,7 @@ for (folder in grupos){
     cat("Mosaicking", name, "\n")
     gdalwarp(
       srcfile = list.files(folder, 
-                           pattern = ".tif$", 
+                           pattern = "Prediction|OOTR.tif$", 
                            full.names = TRUE), 
       dstfile = paste(folder, 
                       paste0(name, "_Merged.tif"), sep = "/"), 
