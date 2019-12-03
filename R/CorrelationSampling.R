@@ -1,0 +1,6 @@
+stackedIndex <- stack(RichnessLandscapeVarResults, AbundanceLandscapeVarResults)
+samp <- sampleRandom(stackedIndex, 24000, xy = TRUE, sp=FALSE, na.rm = TRUE)
+head(samp)
+dim(samp)
+as_tibble(samp)
+write_csv(as_tibble(samp), "../Data/CSV/Results/Rastersamples.csv")
