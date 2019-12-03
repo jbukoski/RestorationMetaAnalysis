@@ -203,8 +203,10 @@ Ou seja, além da densidade de conbertura florestal estamos trabalhando com a á
 ## Pos processing  
 1. Download results;
 1. [Biomes and Countries data preparation]('./R/DataRasterization.R');  
-1. [Mosaicking results]('./R/ResulsMosaicking.R');  
-1. [Variation analysis]('./R/LandScapeVariationAnalysis.R')  
+1. [Mosaicking results]('./R/ResulsMosaicking.R');
+1. [Generating random points for correlation analysis]('./R/CorrelationSampling.R');  
+    1. [points sampled]('./Data/CSV/Results/Rastersamples.csv');  
+1. [Variation analysis]('./R/LandScapeVariationAnalysis.R');  
 
 ## Scripts  
 
