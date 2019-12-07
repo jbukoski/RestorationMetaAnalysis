@@ -138,7 +138,7 @@ focal(striclyPA, kernel, "sum", na.rm=TRUE) / sum(kernel)
 Thus the process to be run will all be done in GEE;  
 
 ## Fourth Round:  
-All process were done in **GEE**. The script can be found [here](https://code.earthengine.google.com/acb4d16f13226894a0cbe5a18e18bc95);
+All process were done in **GEE**. The script can be found [here](https://code.earthengine.google.com/6aafb695a9c0c0e36de860def26ce87c);
 During the validation process, few changes occured:  
 
 1. Study site 181 was not used due its location doesn't fit the layer resolution;  

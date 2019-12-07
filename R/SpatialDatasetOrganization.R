@@ -4,6 +4,13 @@ library(dplyr)
 
 # csv
 # Those results were sent to GoogleEathEngine
+# all data
+all.pts <- read_csv("../Data/CSV/Database_18_06_01.csv") %>%
+  mutate(Longitude = as.numeric(Longitude)) %>% 
+  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326, na.fail = FALSE)
+plot(st_geometry(all.pts))
+write_sf(all.pts, "../Data/Vector/Database_10_06_01.shp")
+
 # Flora ----
 # data sent by e-mail on "ter, 29 de out 12:49" by Pablo
 
