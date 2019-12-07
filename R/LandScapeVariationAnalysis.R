@@ -13,10 +13,17 @@ RichnessLandscapeVarResults <- stack(RichnessGrupos)
 png("./plots/AbundanceLandscapeVariation.png")
 rasterVis::densityplot(AbundanceLandscapeVarResults)
 dev.off()
+#png("./plots/AbundanceLandscapeVariationHist.png")
+#rasterVis::histogram(AbundanceLandscapeVarResults)
+#dev.off()
 
 png("./plots/RichnessLandscapeVariation.png")
 rasterVis::densityplot(RichnessLandscapeVarResults)
 dev.off()
+#png("./plots/RichnessLandscapeVariationHist.png")
+#rasterVis::histogram(RichnessLandscapeVarResults)
+#dev.off()
+
 
 # Not done -----
 BiomesLayer <- raster("../Data/Raster/ForestBiomesRaster.tif")
@@ -24,15 +31,17 @@ biomes.ref <- read_csv("/media/felipe/DATA/Proyectos/SE_EC_MetaAnalysis/Scripts/
 
 do_biome <- FALSE # must set TRUE to analyse per biome or other region
 result <- tibble()
-for (a in 1:nlayers(landscapeVarResults)){
+for (a in 1:nlayers(AbundanceLandscapeVarResults)){
   # a = 1
   
   # Organizing raster layer
-  landscape <- landscapeVarResults[[a]]
+  landscape <- AbundanceLandscapeVarResults[[a]]
   
   # creating name "group_metric"
-  suffix <- dplyr::last(strsplit(grupos[a], split = "/")[[1]])
-  suffix <- paste(strsplit(suffix, split = "_")[[1]][1:2], collapse = "_")
+  suffix <- dplyr::last(strsplit(landscape@file@name, split = "/")[[1]])
+  suffixGroup <- strsplit(suffix, split = "_")[[1]][1]
+  suffix <- strsplit(suffix, split = "_")[[1]][2]
+  
   
   # in case the analysis should be done by biome:
   if (do_biome){
@@ -66,10 +75,20 @@ for (a in 1:nlayers(landscapeVarResults)){
   } else {
     cat("Estimating frequency table for", suffix, "\n")
     BandFreqTable <- as_tibble(
-      freq( landscape,
+      freq( 
+        landscape,
             digits = 4, useNA='no', progress = "text", merge = TRUE)
     ) %>% 
-      dplyr::mutate( group = suffix )
+      dplyr::mutate( group = suffixGroup )
+    BandFreqTable <- as_tibble(
+      na.omit(
+        as.data.frame(
+          landscape,
+          digits = 4, useNA='no', progress = "text", merge = TRUE)
+      )
+      ) %>% 
+      dplyr::mutate( group = suffixGroup )
+    write_csv(BandFreqTable, paste0("../Data/CSV/Results/result_", suffix, "_", suffixGroup, ".csv"))
     
     result <- dplyr::bind_rows(result, BandFreqTable)
     }
