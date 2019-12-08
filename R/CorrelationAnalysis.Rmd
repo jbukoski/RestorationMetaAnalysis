@@ -1,0 +1,148 @@
+---
+title: "Correlation Analysis"
+author: "Felipe Barros"
+date: "12/7/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Correlation Analysis
+
+Tasks:  
+
+> Ou seja, entre riqueza e abundância do msm grupo, entre riqueza de grupos diferentes, entre abundância de grupos diferentes e tb entre riqueza e abundância de grupos diferentes. Os pontos são para resgatar os valores preditos dos modelos.
+
+```{r loading_packages, warning=FALSE, include=FALSE}
+library(raster)
+library(readr)
+library(dplyr)
+library(tmap)
+library(sf)
+library(corrplot)
+```
+```{r loading_results, warning=FALSE, echo=FALSE, results='hide'}
+# Getting all results
+indexLayers <- list.files("../Data/Raster/Results", pattern = "Abundance_Norm.tif$|ness_Norm.tif$", recursive = TRUE, full.names = TRUE)
+
+# stacking
+stackedIndex <- stack(indexLayers)
+mask <- stackedIndex[[1]]>0
+```
+
+## Sampling pixels over all models  
+
+```{r sampling_overall, eval = FALSE}
+# sampling over all layers
+set.seed(031219)
+samp <- sampleRandom(stackedIndex, 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
+samp <- as_tibble(samp)
+write_csv(samp, "../Data/CSV/Results/Rastersamples.csv")
+```
+
+```{r loading_sampleOverall, message=FALSE}
+samp <- read_csv("../Data/CSV/Results/Rastersamples.csv")
+samples_sf <- st_as_sf(samp, coords = c("x", "y"), crs = 4326)
+
+#tm_shape(mask) +
+#  tm_raster( legend.show = FALSE) +
+#  tm_shape(samples_sf) + 
+#  tm_dots()
+```
+### Correlation over all models  
+
+```{r correlationOverall, message=FALSE}
+sampCor <- cor(samp[,3:ncol(samp)], method="pearson")
+corrplot(sampCor, method="circle", type="upper", diag=F, order = "hclust")
+#print(sampCor)
+```
+
+## Correlation by group
+
+### Flora  
+
+```{r richnessAbudanceFlora, eval=FALSE}
+# Flora 
+set.seed(031219)
+sampFlora <- sampleRandom(stackedIndex[[c(1:2)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
+sampFlora <- as_tibble(sampFlora)
+write_csv(sampFlora, "../Data/CSV/Results/FloraRastersamples.csv")
+```
+```{r correlationFlora, message=FALSE}
+sampFlora <- read_csv("../Data/CSV/Results/FloraRastersamples.csv")
+sampCorFlora <- cor(sampFlora[,3:ncol(sampFlora)], method="pearson")
+corrplot(sampCorFlora, method="circle", type="upper", diag=F, order = "hclust")
+```  
+
+P-Valor pelo cor.test = `r cor.test(sampFlora$Flora_Abundance_Norm, sampFlora$Flora_Richness_Norm)$p.value`  
+
+### Invertebrates  
+
+```{r richnessAbudanceInvert, eval=FALSE}
+# Vert
+set.seed(031219)
+sampInvert <- sampleRandom(stackedIndex[[c(3:4)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
+sampInvert <- as_tibble(sampInvert)
+write_csv(sampInvert, "../Data/CSV/Results/InvertRastersamples.csv")
+```
+```{r correlationInvert, message=FALSE}
+sampInvert <- read_csv("../Data/CSV/Results/InvertRastersamples.csv")
+sampCorInvert <- cor(sampInvert[,3:ncol(sampInvert)], method="pearson")
+corrplot(sampCorInvert, method="circle", type="upper", diag=F, order = "hclust")
+```  
+
+P-Valor pelo cor.test = `r cor.test(sampInvert$Invert_Abundance_Norm, sampInvert$Invert_Richness_Norm)$p.value`  
+
+### Vertebrates  
+
+```{r richnessAbudanceVert, eval=FALSE}
+# Vert
+set.seed(031219)
+sampVert <- sampleRandom(stackedIndex[[c(5:6)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
+sampVert <- as_tibble(sampVert)
+write_csv(sampInvert, "../Data/CSV/Results/VertRastersamples.csv")
+```
+```{r correlationVert, message=FALSE}
+sampVert <- read_csv("../Data/CSV/Results/VertRastersamples.csv")
+sampCorVert <- cor(sampVert[,3:ncol(sampVert)], method="pearson")
+corrplot(sampCorVert, method="circle", type="upper", diag=F, order = "hclust")
+```  
+
+P-Valor pelo cor.test = `r cor.test(sampVert$Invert_Abundance_Norm, sampVert$Invert_Richness_Norm)$p.value`  
+
+## Richness between groups
+> entre riqueza de grupos diferentes
+ 
+
+```{r richnessBetweenGroups, eval=FALSE}
+
+set.seed(031219)
+sampRichnessBG <- sampleRandom(stackedIndex[[c(2,4,6)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
+sampRichnessBG <- as_tibble(sampRichnessBG)
+write_csv(sampRichnessBG, "../Data/CSV/Results/RichnessRastersamples.csv")
+```
+```{r correlationRichness, message=FALSE}
+sampRichnessBG <- read_csv("../Data/CSV/Results/RichnessRastersamples.csv")
+sampCorRichness <- cor(sampRichnessBG[,3:ncol(sampRichnessBG)], method="pearson")
+corrplot(sampCorRichness, method="circle", type="upper", diag=F, order = "hclust")
+```  
+
+## Abundance between groups  
+
+> abundancia de grupos diferentes
+ 
+```{r abundanceBetweenGroups, eval=FALSE}
+# Flora 
+set.seed(031219)
+sampAbundanceBG <- sampleRandom(stackedIndex[[c(1,3,5)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
+sampAbundanceBG <- as_tibble(sampAbundanceBG)
+write_csv(sampAbundanceBG, "../Data/CSV/Results/AbundanceRastersamples.csv")
+```
+```{r correlationAbundance, message=FALSE}
+sampAbundanceBG <- read_csv("../Data/CSV/Results/AbundanceRastersamples.csv")
+sampCorAbundance <- cor(sampAbundanceBG[,3:ncol(sampAbundanceBG)], method="pearson")
+corrplot(sampCorAbundance, method="circle", type="upper", diag=F, order = "hclust")
+```  
+
