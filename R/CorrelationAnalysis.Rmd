@@ -76,7 +76,7 @@ sampCorFlora <- cor(sampFlora[,3:ncol(sampFlora)], method="pearson")
 corrplot(sampCorFlora, method="circle", type="upper", diag=F, order = "hclust")
 ```  
 
-P-Valor pelo cor.test = `r cor.test(sampFlora$Flora_Abundance_Norm, sampFlora$Flora_Richness_Norm)$p.value`  
+P-value from `cor.test()` = `r cor.test(sampFlora$Flora_Abundance_Norm, sampFlora$Flora_Richness_Norm)$p.value`, correlation value = `r cor.test(sampFlora$Flora_Abundance_Norm, sampFlora$Flora_Richness_Norm)$estimate`.  
 
 ### Invertebrates  
 
@@ -93,7 +93,7 @@ sampCorInvert <- cor(sampInvert[,3:ncol(sampInvert)], method="pearson")
 corrplot(sampCorInvert, method="circle", type="upper", diag=F, order = "hclust")
 ```  
 
-P-Valor pelo cor.test = `r cor.test(sampInvert$Invert_Abundance_Norm, sampInvert$Invert_Richness_Norm)$p.value`  
+P-value from `cor.test()` = `r cor.test(sampInvert$Invert_Abundance_Norm, sampInvert$Invert_Richness_Norm)$p.value`, correlation value = `r cor.test(sampInvert$Invert_Abundance_Norm, sampInvert$Invert_Richness_Norm)$estimate`.   
 
 ### Vertebrates  
 
@@ -102,7 +102,7 @@ P-Valor pelo cor.test = `r cor.test(sampInvert$Invert_Abundance_Norm, sampInvert
 set.seed(031219)
 sampVert <- sampleRandom(stackedIndex[[c(5:6)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
 sampVert <- as_tibble(sampVert)
-write_csv(sampInvert, "../Data/CSV/Results/VertRastersamples.csv")
+write_csv(sampVert, "../Data/CSV/Results/VertRastersamples.csv")
 ```
 ```{r correlationVert, message=FALSE}
 sampVert <- read_csv("../Data/CSV/Results/VertRastersamples.csv")
@@ -110,14 +110,13 @@ sampCorVert <- cor(sampVert[,3:ncol(sampVert)], method="pearson")
 corrplot(sampCorVert, method="circle", type="upper", diag=F, order = "hclust")
 ```  
 
-P-Valor pelo cor.test = `r cor.test(sampVert$Invert_Abundance_Norm, sampVert$Invert_Richness_Norm)$p.value`  
+P-value from `cor.test()` = `r cor.test(sampVert$Vert_Abundance_Norm, sampVert$Vert_Richness_Norm)$p.value`, correlation value = `r cor.test(sampVert$Vert_Abundance_Norm, sampVert$Vert_Richness_Norm)$estimate`.   
 
 ## Richness between groups
 > entre riqueza de grupos diferentes
  
 
 ```{r richnessBetweenGroups, eval=FALSE}
-
 set.seed(031219)
 sampRichnessBG <- sampleRandom(stackedIndex[[c(2,4,6)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
 sampRichnessBG <- as_tibble(sampRichnessBG)
@@ -143,6 +142,6 @@ write_csv(sampAbundanceBG, "../Data/CSV/Results/AbundanceRastersamples.csv")
 ```{r correlationAbundance, message=FALSE}
 sampAbundanceBG <- read_csv("../Data/CSV/Results/AbundanceRastersamples.csv")
 sampCorAbundance <- cor(sampAbundanceBG[,3:ncol(sampAbundanceBG)], method="pearson")
-corrplot(sampCorAbundance, method="circle", type="upper", diag=F, order = "hclust")
+corrplot(sampCorAbundance, method="circle", type="upper", diag=F, order = "hclust", col = RColorBrewer::brewer.pal(11, 'Spectral'), cl.align.text = "l")
 ```  
 
