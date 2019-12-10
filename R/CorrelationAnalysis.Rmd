@@ -22,19 +22,37 @@ library(dplyr)
 library(tmap)
 library(sf)
 library(corrplot)
+#install.packages("ape") 
+library(ape)
 ```
 ```{r loading_results, warning=FALSE, echo=FALSE, results='hide'}
 # Getting all results
 indexLayers <- list.files("../Data/Raster/Results", pattern = "Abundance_Norm.tif$|ness_Norm.tif$", recursive = TRUE, full.names = TRUE)
 
 # stacking
-stackedIndex <- stack(indexLayers)
-mask <- stackedIndex[[1]]>0
+#stackedIndex <- stack(indexLayers)
+#mask <- stackedIndex[[1]]>0
+
+cor.mtest <- function(mat, ...) {
+    mat <- as.matrix(mat)
+    n <- ncol(mat)
+    p.mat<- matrix(NA, n, n)
+    diag(p.mat) <- 0
+    for (i in 1:(n - 1)) {
+        for (j in (i + 1):n) {
+            tmp <- cor.test(mat[, i], mat[, j], ...)
+            p.mat[i, j] <- p.mat[j, i] <- tmp$p.value
+        }
+    }
+  colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
+  p.mat
+}
+
 ```
 
 ## Sampling pixels over all models  
 
-```{r sampling_overall, eval = FALSE}
+```{r sampling_overall, eval = FALSE, echo=TRUE}
 # sampling over all layers
 set.seed(031219)
 samp <- sampleRandom(stackedIndex, 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
@@ -50,13 +68,81 @@ samples_sf <- st_as_sf(samp, coords = c("x", "y"), crs = 4326)
 #  tm_raster( legend.show = FALSE) +
 #  tm_shape(samples_sf) + 
 #  tm_dots()
-```
+
+```  
+
 ### Correlation over all models  
 
 ```{r correlationOverall, message=FALSE}
 sampCor <- cor(samp[,3:ncol(samp)], method="pearson")
-corrplot(sampCor, method="circle", type="upper", diag=F, order = "hclust")
-#print(sampCor)
+corrplot(sampCor, type="upper", order="hclust", col=RColorBrewer::brewer.pal(n=8, name="RdYlBu"), cl.align.text = "l", addCoef.col = "black")
+```  
+
+```{r}
+# matrix of the p-value of the correlation
+p.samp <- cor.mtest(samp[,-c(1,2)])
+pander::pander(p.samp, caption = "p-value for each pair of variable", split.tables	= Inf, style = 'rmarkdown')
+```
+
+
+**CORELAÇÃO ESPACIAL**:  
+
+```{r}
+#https://stats.idre.ucla.edu/r/faq/how-can-i-calculate-morans-i-in-r/
+```
+
+```{r spatGeneralCorrelation, message=FALSE, error=FALSE, warning=FALSE, echo=FALSE, prompt=FALSE, comment=FALSE}
+samp.dists <- as.matrix(dist(cbind(samp$x, samp$y)))
+samp.dists <- 1/samp.dists
+diag(samp.dists) <- 0
+pander::pander(samp.dists[1:5, 1:5], caption = "First 5 values of distances in degree")
+```  
+
+**I-Moran** calculated for Flora_Abundance_Norm = `r Moran.I(samp$Flora_Abundance_Norm, samp.dists)$observed`  
+
+## Richness between groups  
+
+> entre riqueza de grupos diferentes
+ 
+```{r richnessBetweenGroups, eval=FALSE}
+set.seed(031219)
+sampRichnessBG <- sampleRandom(stackedIndex[[c(2,4,6)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
+sampRichnessBG <- as_tibble(sampRichnessBG)
+write_csv(sampRichnessBG, "../Data/CSV/Results/RichnessRastersamples.csv")
+```
+```{r correlationRichness, message=FALSE}
+sampRichnessBG <- read_csv("../Data/CSV/Results/RichnessRastersamples.csv")
+sampCorRichness <- cor(sampRichnessBG[,3:ncol(sampRichnessBG)], method="pearson")
+corrplot(sampCorRichness, method="circle", type="upper", diag=F, order = "hclust", col=RColorBrewer::brewer.pal(n=8, name="RdYlBu"), cl.align.text = "l", addCoef.col = "black")
+```  
+
+```{r}
+# matrix of the p-value of the correlation
+p.sampRichnessBG <- cor.mtest(sampRichnessBG[,-c(1,2)])
+pander::pander(p.sampRichnessBG, caption = "p-value for each pair of variable", split.tables	= Inf, style = 'rmarkdown')
+```
+
+## Abundance between groups  
+
+> abundancia de grupos diferentes
+ 
+```{r abundanceBetweenGroups, eval=FALSE}
+# Flora 
+set.seed(031219)
+sampAbundanceBG <- sampleRandom(stackedIndex[[c(1,3,5)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
+sampAbundanceBG <- as_tibble(sampAbundanceBG)
+write_csv(sampAbundanceBG, "../Data/CSV/Results/AbundanceRastersamples.csv")
+```
+```{r correlationAbundance, message=FALSE}
+sampAbundanceBG <- read_csv("../Data/CSV/Results/AbundanceRastersamples.csv")
+sampCorAbundance <- cor(sampAbundanceBG[,3:ncol(sampAbundanceBG)], method="pearson")
+corrplot(sampCorAbundance, method="circle", type="upper", diag=F, order = "hclust", col=RColorBrewer::brewer.pal(n=8, name="RdYlBu"), cl.align.text = "l", addCoef.col = "black")
+```  
+
+```{r}
+# matrix of the p-value of the correlation
+p.sampAbundanceBG <- cor.mtest(sampAbundanceBG[,-c(1,2)])
+pander::pander(p.sampAbundanceBG, caption = "p-value for each pair of variable", split.tables	= Inf, style = 'rmarkdown')
 ```
 
 ## Correlation by group
@@ -73,7 +159,7 @@ write_csv(sampFlora, "../Data/CSV/Results/FloraRastersamples.csv")
 ```{r correlationFlora, message=FALSE}
 sampFlora <- read_csv("../Data/CSV/Results/FloraRastersamples.csv")
 sampCorFlora <- cor(sampFlora[,3:ncol(sampFlora)], method="pearson")
-corrplot(sampCorFlora, method="circle", type="upper", diag=F, order = "hclust")
+corrplot(sampCorFlora, method="circle", type="upper", diag=F, order = "hclust", col=RColorBrewer::brewer.pal(n=8, name="RdYlBu"), cl.align.text = "l", addCoef.col = "black")
 ```  
 
 P-value from `cor.test()` = `r cor.test(sampFlora$Flora_Abundance_Norm, sampFlora$Flora_Richness_Norm)$p.value`, correlation value = `r cor.test(sampFlora$Flora_Abundance_Norm, sampFlora$Flora_Richness_Norm)$estimate`.  
@@ -90,7 +176,7 @@ write_csv(sampInvert, "../Data/CSV/Results/InvertRastersamples.csv")
 ```{r correlationInvert, message=FALSE}
 sampInvert <- read_csv("../Data/CSV/Results/InvertRastersamples.csv")
 sampCorInvert <- cor(sampInvert[,3:ncol(sampInvert)], method="pearson")
-corrplot(sampCorInvert, method="circle", type="upper", diag=F, order = "hclust")
+corrplot(sampCorInvert, method="circle", type="upper", diag=F, order = "hclust", col=RColorBrewer::brewer.pal(n=8, name="RdYlBu"), cl.align.text = "l", addCoef.col = "black")
 ```  
 
 P-value from `cor.test()` = `r cor.test(sampInvert$Invert_Abundance_Norm, sampInvert$Invert_Richness_Norm)$p.value`, correlation value = `r cor.test(sampInvert$Invert_Abundance_Norm, sampInvert$Invert_Richness_Norm)$estimate`.   
@@ -107,41 +193,7 @@ write_csv(sampVert, "../Data/CSV/Results/VertRastersamples.csv")
 ```{r correlationVert, message=FALSE}
 sampVert <- read_csv("../Data/CSV/Results/VertRastersamples.csv")
 sampCorVert <- cor(sampVert[,3:ncol(sampVert)], method="pearson")
-corrplot(sampCorVert, method="circle", type="upper", diag=F, order = "hclust")
+corrplot(sampCorVert, method="circle", type="upper", diag=F, order = "hclust", col=RColorBrewer::brewer.pal(n=8, name="RdYlBu"), cl.align.text = "l", addCoef.col = "black")
 ```  
 
 P-value from `cor.test()` = `r cor.test(sampVert$Vert_Abundance_Norm, sampVert$Vert_Richness_Norm)$p.value`, correlation value = `r cor.test(sampVert$Vert_Abundance_Norm, sampVert$Vert_Richness_Norm)$estimate`.   
-
-## Richness between groups
-> entre riqueza de grupos diferentes
- 
-
-```{r richnessBetweenGroups, eval=FALSE}
-set.seed(031219)
-sampRichnessBG <- sampleRandom(stackedIndex[[c(2,4,6)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
-sampRichnessBG <- as_tibble(sampRichnessBG)
-write_csv(sampRichnessBG, "../Data/CSV/Results/RichnessRastersamples.csv")
-```
-```{r correlationRichness, message=FALSE}
-sampRichnessBG <- read_csv("../Data/CSV/Results/RichnessRastersamples.csv")
-sampCorRichness <- cor(sampRichnessBG[,3:ncol(sampRichnessBG)], method="pearson")
-corrplot(sampCorRichness, method="circle", type="upper", diag=F, order = "hclust")
-```  
-
-## Abundance between groups  
-
-> abundancia de grupos diferentes
- 
-```{r abundanceBetweenGroups, eval=FALSE}
-# Flora 
-set.seed(031219)
-sampAbundanceBG <- sampleRandom(stackedIndex[[c(1,3,5)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
-sampAbundanceBG <- as_tibble(sampAbundanceBG)
-write_csv(sampAbundanceBG, "../Data/CSV/Results/AbundanceRastersamples.csv")
-```
-```{r correlationAbundance, message=FALSE}
-sampAbundanceBG <- read_csv("../Data/CSV/Results/AbundanceRastersamples.csv")
-sampCorAbundance <- cor(sampAbundanceBG[,3:ncol(sampAbundanceBG)], method="pearson")
-corrplot(sampCorAbundance, method="circle", type="upper", diag=F, order = "hclust", col = RColorBrewer::brewer.pal(11, 'Spectral'), cl.align.text = "l")
-```  
-
