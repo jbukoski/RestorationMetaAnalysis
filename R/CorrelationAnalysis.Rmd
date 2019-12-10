@@ -85,20 +85,35 @@ pander::pander(p.samp, caption = "p-value for each pair of variable", split.tabl
 ```
 
 
-**CORELAÇÃO ESPACIAL**:  
+**Spatial correlation**:  
 
 ```{r}
 #https://stats.idre.ucla.edu/r/faq/how-can-i-calculate-morans-i-in-r/
+#https://gis.stackexchange.com/questions/304122/compute-morans-i-on-more-than-one-attribute
+
 ```
 
 ```{r spatGeneralCorrelation, message=FALSE, error=FALSE, warning=FALSE, echo=FALSE, prompt=FALSE, comment=FALSE}
 samp.dists <- as.matrix(dist(cbind(samp$x, samp$y)))
 samp.dists <- 1/samp.dists
 diag(samp.dists) <- 0
-pander::pander(samp.dists[1:5, 1:5], caption = "First 5 values of distances in degree")
+#pander::pander(samp.dists[1:5, 1:5], caption = "First 5 values of distances in degree")
 ```  
 
-**I-Moran** calculated for Flora_Abundance_Norm = `r Moran.I(samp$Flora_Abundance_Norm, samp.dists)$observed`  
+**I-Moran** calculated for:  
+
+* Flora_Abundance_Norm = `r Moran.I(samp$Flora_Abundance_Norm, samp.dists)$observed`  
+  * p-value = `r Moran.I(samp$Flora_Abundance_Norm, samp.dists)$p.value`  
+* Flora_Richness_Norm = `r Moran.I(samp$Flora_Richness_Norm, samp.dists)$observed`  
+  * Flora_Richness_Norm = `r Moran.I(samp$Flora_Richness_Norm, samp.dists)$p.value`   
+* Vert_Abundance_Norm = `r Moran.I(samp$Vert_Abundance_Norm, samp.dists)$observed`   
+  * Vert_Abundance_Norm = `r Moran.I(samp$Vert_Abundance_Norm, samp.dists)$p.value`  
+* Vert_Richness_Norm = `r Moran.I(samp$Vert_Richness_Norm, samp.dists)$observed`  
+  * Vert_Richness_Norm = `r Moran.I(samp$Vert_Richness_Norm, samp.dists)$p.value`  
+* Invert_Abundance_Norm = `r Moran.I(samp$Invert_Abundance_Norm, samp.dists)$observed`  
+  * Invert_Abundance_Norm = `r Moran.I(samp$Invert_Abundance_Norm, samp.dists)$p.value`  
+* Invert_Richness_Norm = `r Moran.I(samp$Invert_Richness_Norm, samp.dists)$observed`  
+  * Invert_Richness_Norm = `r Moran.I(samp$Invert_Richness_Norm, samp.dists)$p.value`  
 
 ## Richness between groups  
 
