@@ -24,13 +24,15 @@ library(sf)
 library(corrplot)
 #install.packages("ape") 
 library(ape)
+#install.packages("pgirmess")
+library(pgirmess)
 ```
 ```{r loading_results, warning=FALSE, echo=FALSE, results='hide'}
 # Getting all results
 indexLayers <- list.files("../Data/Raster/Results", pattern = "Abundance_Norm.tif$|ness_Norm.tif$", recursive = TRUE, full.names = TRUE)
 
 # stacking
-#stackedIndex <- stack(indexLayers)
+stackedIndex <- stack(indexLayers)
 #mask <- stackedIndex[[1]]>0
 
 cor.mtest <- function(mat, ...) {
@@ -85,7 +87,7 @@ pander::pander(p.samp, caption = "p-value for each pair of variable", split.tabl
 ```
 
 
-**Spatial correlation**:  
+#### Spatial correlation:  
 
 ```{r}
 #https://stats.idre.ucla.edu/r/faq/how-can-i-calculate-morans-i-in-r/
@@ -115,12 +117,27 @@ diag(samp.dists) <- 0
 * Invert_Richness_Norm = `r Moran.I(samp$Invert_Richness_Norm, samp.dists)$observed`  
   * Invert_Richness_Norm = `r Moran.I(samp$Invert_Richness_Norm, samp.dists)$p.value`  
 
+**Correlogram**
+```{r spatGeneralCorrelogram, message=FALSE, error=FALSE, warning=FALSE, echo=TRUE, prompt=FALSE, comment=FALSE}
+
+#t <- correlog.nc(x = samp$x, y = samp$y, z = samp[, 5], w = NULL, increment = 100, resamp = 1000, latlon = TRUE, na.rm = FALSE, quiet = FALSE)
+t <- pgirmess::correlog(coords=samp[,c(1:2)], z=samp$Flora_Abundance_Norm, method="Moran", nbclass=NULL)
+plot(t)
+```  
+
+```{r, eval = FALSE}
+#install.packages("devtools")
+if (!require("rspatial")) devtools::install_github('rspatial/rspatial')
+library(rspatial)
+ppp(Ameacadas_SEM_14_12[,3], Ameacadas_SEM_14_12[,4], marks=as.factor(Ameacadas_SEM_14_12[,2]), window=as.owin(area_sem))
+```  
+
 ## Richness between groups  
 
 > entre riqueza de grupos diferentes
  
 ```{r richnessBetweenGroups, eval=FALSE}
-set.seed(031219)
+set.seed(031218)
 sampRichnessBG <- sampleRandom(stackedIndex[[c(2,4,6)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
 sampRichnessBG <- as_tibble(sampRichnessBG)
 write_csv(sampRichnessBG, "../Data/CSV/Results/RichnessRastersamples.csv")
@@ -143,7 +160,7 @@ pander::pander(p.sampRichnessBG, caption = "p-value for each pair of variable", 
  
 ```{r abundanceBetweenGroups, eval=FALSE}
 # Flora 
-set.seed(031219)
+set.seed(031217)
 sampAbundanceBG <- sampleRandom(stackedIndex[[c(1,3,5)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
 sampAbundanceBG <- as_tibble(sampAbundanceBG)
 write_csv(sampAbundanceBG, "../Data/CSV/Results/AbundanceRastersamples.csv")
@@ -166,7 +183,7 @@ pander::pander(p.sampAbundanceBG, caption = "p-value for each pair of variable",
 
 ```{r richnessAbudanceFlora, eval=FALSE}
 # Flora 
-set.seed(031219)
+set.seed(031216)
 sampFlora <- sampleRandom(stackedIndex[[c(1:2)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
 sampFlora <- as_tibble(sampFlora)
 write_csv(sampFlora, "../Data/CSV/Results/FloraRastersamples.csv")
@@ -183,7 +200,7 @@ P-value from `cor.test()` = `r cor.test(sampFlora$Flora_Abundance_Norm, sampFlor
 
 ```{r richnessAbudanceInvert, eval=FALSE}
 # Vert
-set.seed(031219)
+set.seed(031215)
 sampInvert <- sampleRandom(stackedIndex[[c(3:4)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
 sampInvert <- as_tibble(sampInvert)
 write_csv(sampInvert, "../Data/CSV/Results/InvertRastersamples.csv")
@@ -200,7 +217,7 @@ P-value from `cor.test()` = `r cor.test(sampInvert$Invert_Abundance_Norm, sampIn
 
 ```{r richnessAbudanceVert, eval=FALSE}
 # Vert
-set.seed(031219)
+set.seed(031214)
 sampVert <- sampleRandom(stackedIndex[[c(5:6)]], 50000, xy = TRUE, sp=FALSE, na.rm = TRUE)
 sampVert <- as_tibble(sampVert)
 write_csv(sampVert, "../Data/CSV/Results/VertRastersamples.csv")
