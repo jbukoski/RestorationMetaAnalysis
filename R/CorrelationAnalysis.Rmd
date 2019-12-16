@@ -77,7 +77,7 @@ samples_sf <- st_as_sf(samp, coords = c("x", "y"), crs = 4326)
 
 ```{r correlationOverall, message=FALSE}
 sampCor <- cor(samp[,3:ncol(samp)], method="pearson")
-corrplot(sampCor, type="upper", order="hclust", col=RColorBrewer::brewer.pal(n=8, name="RdYlBu"), cl.align.text = "l", addCoef.col = "black")
+corrplot(sampCor, type="upper", order="hclust", col=RColorBrewer::brewer.pal(n=8, name="RdYlBu"), cl.align.text = "l", addCoef.col = "black", sig.level = 0.05, diag = F, insig = "blank", p.mat = sampCor)
 ```  
 
 ```{r}
