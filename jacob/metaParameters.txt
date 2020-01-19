@@ -1,0 +1,16 @@
+pair, numPts, seed
+fa_vs_fr, 25000, 9999
+fa_vs_ia, 25000, 9999
+fa_vs_ir, 30000, 9999
+fa_vs_va, 25000, 9999
+fa_vs_vr, 30000, 9999
+fr_vs_ia, 25000, 9999
+fr_vs_ir, 20000, 9999
+fr_vs_va, 25000, 9999
+fr_vs_vr, 25000, 9999
+ia_vs_ir, 25000, 9999
+ia_vs_va, 25000, 9999
+ia_vs_vr, 25000, 9999
+ir_vs_va, 25000, 9999
+ir_vs_vr, 25000, 9999
+va_vs_vr, 25000, 9999
