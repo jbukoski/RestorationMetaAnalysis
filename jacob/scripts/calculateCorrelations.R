@@ -1,8 +1,36 @@
-## Calculation of Pearson's Correlation for biodiversity data
+################################################################
+## Calculation of Pearson's Correlation for biodiversity data ##
+################################################################
+
+# This scripts calculates Pearson's correlation for the different biodiversity
+# prediction layers as well as various tests and visualizations of the data.
+# The correlations are calculated using 1,000 pts randomly sampled from all 
+# unique pairings of 6 variables:
+
+# 1. flora abundance
+# 2. flora richness
+# 3. invertebrate abundance
+# 4. invertebtrate richness
+# 5. vertebrate abundance
+# 6. vertebrate richness
+
+# The script contains the following sections:
+  
+# 1. Calculation of Pearson's Correlation.
+# 2. Visualization of distributions of the 6 response variables.
+# 3. Examination of spatial autocorrelation and biases in the correlation scores.
+
+#--------------------------------------------------------
+
+#############################################
+## 1. Calculation of Pearson's Correlation ##
+#############################################
+
+# Load libraries, set directories, and write a function to compute correlations for all csvs
 
 library(tidyverse)
 
-dir <- "~/Desktop/corr_data/data/"
+dir <- "~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/csv/"
 
 files <- list.files(dir)
 
@@ -36,6 +64,8 @@ for(file in files) {
 
 }
 
+# Format as a correlation matrix.
+
 sum_dat <- summary %>% 
   separate(pair, sep = "_vs_", into = c("v1", "v2")) %>%
   select("v1", "v2", corr)
@@ -55,15 +85,69 @@ colnames(corr) <- var # column names
 
 corr
 
+# Write out summary results to file.
+# summaryResults.csv = simple table of summary statistics
+# corrMatrix.csv = correlations between variables formatted as a correlation matrix.
 
-write_csv(summary, "~/Desktop/corr_data/summaryResults.csv")
-write_csv(corr, "~/Desktop/corr_data/corrMatrix.csv")
+write_csv(summary, "~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/processed/summaryResults.csv")
+write_csv(corr, "~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/processed/corrMatrix.csv")
 
 
-#---------------------------------
+#-------------------------------------------------
+# Build a histogram plot using shapefiles of 5,000 pts
+
+library(sf)
+
+indir <- "~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/shp/"
+
+fa <- read_sf(paste0(indir, "fa_pts_distribution.shp")) %>% rename(fa = first) %>% st_set_geometry(NULL) 
+fr <- read_sf(paste0(indir, "fr_pts_distribution.shp")) %>% rename(fr = first) %>% st_set_geometry(NULL) 
+ia <- read_sf(paste0(indir, "ia_pts_distribution.shp")) %>% rename(ia = first) %>% st_set_geometry(NULL) 
+ir <- read_sf(paste0(indir, "ir_pts_distribution.shp")) %>% rename(ir = first) %>% st_set_geometry(NULL) 
+va <- read_sf(paste0(indir, "va_pts_distribution.shp")) %>% rename(va = first) %>% st_set_geometry(NULL) 
+vr <- read_sf(paste0(indir, "vr_pts_distribution.shp")) %>% rename(vr = first) %>% st_set_geometry(NULL) 
+
+dist_dat <- bind_cols(fa, fr, ia, ir, va, vr) %>%
+  gather(key = "var", value = "estimate") %>%
+  mutate(var = factor(var))
+
+levels(dist_dat$var) <- c(
+  "Flora Abundance",
+  "Flora Richeness",
+  "Invertebrate Abundance",
+  "Invertebrate Richness",
+  "Vertebrate Abundance",
+  "Vertebrate Richness"
+)
+
+
+fixed <- ggplot(dist_dat) +
+  facet_wrap(. ~ var, scales = "fixed", nrow = 3) +
+  geom_histogram(aes(estimate), bins = 50) +
+  ylab("Frequency") +
+  xlab("ln(Response Ratio)") +
+  theme_bw()
+
+free <- ggplot(dist_dat) +
+  facet_wrap(. ~ var, scales = "free", nrow = 3) +
+  geom_histogram(aes(estimate), bins = 50) +
+  ylab("Frequency") +
+  xlab("ln(Response Ratio)") +
+  theme_bw()
+
+ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/fixed_scales.jpg", fixed, device = "jpeg", width = 6, height = 8, units = "in")
+ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/free_scales.jpg", free, device = "jpeg", width = 6, height = 8, units = "in")
+
+#------------------------------------------------------------------
+
+##################################
+## Autocorrelation tests & code ##
+##################################
+
+#------------------------------------------------------------------
 # Examine how the significance changes with the number of points
 
-dat <- read_csv("~/Desktop/corr_data/data/ia_vs_ir.csv")
+dat <- read_csv("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/csv/fa_vs_fr.csv")
 
 ns <- seq(20, 1000, 20)
 
@@ -100,53 +184,9 @@ ggplot(data = summary) +
   geom_smooth(aes(x = n, y = p.value)) +
   theme_bw()
 
-#-------------------------------------------------
-# Build a histogram plot using shapefiles of 5,000 pts
+#-------------------------------------
+# Spatial aurocorrelation
 
-library(sf)
-
-indir <- "~/Desktop/corr_data/shapefiles/"
-
-fa <- read_sf(paste0(indir, "fa_pts_distribution.shp")) %>% rename(fa = first) %>% st_set_geometry(NULL) 
-fr <- read_sf(paste0(indir, "fr_pts_distribution.shp")) %>% rename(fr = first) %>% st_set_geometry(NULL) 
-ia <- read_sf(paste0(indir, "ia_pts_distribution.shp")) %>% rename(ia = first) %>% st_set_geometry(NULL) 
-ir <- read_sf(paste0(indir, "ir_pts_distribution.shp")) %>% rename(ir = first) %>% st_set_geometry(NULL) 
-va <- read_sf(paste0(indir, "va_pts_distribution.shp")) %>% rename(va = first) %>% st_set_geometry(NULL) 
-vr <- read_sf(paste0(indir, "vr_pts_distribution.shp")) %>% rename(vr = first) %>% st_set_geometry(NULL) 
-
-dist_dat <- bind_cols(fa, fr, ia, ir, va, vr) %>%
-  gather(key = "var", value = "estimate") %>%
-  mutate(var = factor(var))
-
-levels(dist_dat$var) <- c(
-  "Flora Abundance",
-  "Flora Richeness",
-  "Invertebrate Abundance",
-  "Invertebrate Richness",
-  "Vertebrate Abundance",
-  "Vertebrate Richness"
-)
-  
-
-fixed <- ggplot(dist_dat) +
-  facet_wrap(. ~ var, scales = "fixed", nrow = 3) +
-  geom_histogram(aes(estimate), bins = 50) +
-  ylab("Frequency") +
-  xlab("ln(Response Ratio)") +
-  theme_bw()
-
-free <- ggplot(dist_dat) +
-  facet_wrap(. ~ var, scales = "free", nrow = 3) +
-  geom_histogram(aes(estimate), bins = 50) +
-  ylab("Frequency") +
-  xlab("ln(Response Ratio)") +
-  theme_bw()
-
-ggsave("~/Desktop/corr_data/figs/fixed_scales.jpg", fixed, device = "jpeg", width = 6, height = 8, units = "in")
-ggsave("~/Desktop/corr_data/figs/free_scales.jpg", free, device = "jpeg", width = 6, height = 8, units = "in")
-
-  
-#--------------------------------
 
 library(sf)
 library(ape)
