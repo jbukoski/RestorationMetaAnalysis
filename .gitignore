@@ -1,5 +1,4 @@
 *.tif
 *.xml
 *.zip
-jacob/data/*/*
-jacob/data/*
+jacob/data/
