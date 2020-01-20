@@ -144,7 +144,6 @@ ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/free_scales.jpg
 ## Autocorrelation tests & code ##
 ##################################
 
-#------------------------------------------------------------------
 # Examine how the significance changes with the number of points
 
 dat <- read_csv("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/csv/fa_vs_fr.csv")
@@ -185,24 +184,40 @@ ggplot(data = summary) +
   theme_bw()
 
 #-------------------------------------
-# Spatial aurocorrelation
+# Spatial autocorrelation
 
-
-library(sf)
 library(ape)
+library(gstat)
+library(sf)
+library(spdep)
+library(tidyverse)
 
 shp <- read_sf("~/Desktop/corr_data/shapefiles/fa_pts_distribution.shp") %>%
   rename(fa = first) %>%
   mutate(long = st_coordinates(.)[, 1],
          lat = st_coordinates(.)[, 2]) %>%
   select(fa, long, lat) %>%
-  sample_n(40)
+  sample_n(100)
 
-shp_df <- st_set_geometry(shp, NULL)
+azimuth_eqdst <- " +proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m no_defs"
+az_eq <- CRS("+proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs")
 
-shp.dists <- as.matrix(dist(cbind(shp_df$long, shp_df$lat)))
+shp <- st_transform(shp, az_eq)
 
-shp.dists.inv <- 1/shp.dists
-diag(shp.dists.inv) <- 0
 
-Moran.I(shp_df$fa, shp.dists.inv)
+shp_knn <- knearneigh(shp, k = 1)  # Only 1 nearest neighbor, can alter later
+shp_nb <- knn2nb(shp_knn)
+w <- nb2listw(shp_nb)
+
+moran(shp$fa, w, n=length(w$neighbours), S0=Szero(w))
+moran.test(shp$fa, w, randomisation=FALSE)
+
+moran.mc(shp$fa, w, nsim=99)
+
+# Compute semivariance and visualize
+
+gs <- gstat(formula = fa~1, data = shp)
+v <- variogram(gs, width = 20)
+
+head(v)
+plot(v)
