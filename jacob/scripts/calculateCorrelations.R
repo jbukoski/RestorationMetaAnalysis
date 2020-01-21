@@ -68,15 +68,17 @@ for(file in files) {
 
 sum_dat <- summary %>% 
   separate(pair, sep = "_vs_", into = c("v1", "v2")) %>%
-  select("v1", "v2", corr)
+  select("v1", "v2", corr, p.val)
 
 var1 <- sum_dat$v1
 var2 <- sum_dat$v2
 r <- sum_dat$corr
+p <- sum_dat$p.val
 
-var <- unique(c(var1,var2))
+var <- unique(c(var1, var2))
 corr <- matrix(1, nrow=6, ncol=6, byrow = T) # a matrix with 1s
-corr[lower.tri(corr,diag = FALSE)] <- r # lower triangular matrix to be r
+#corr[lower.tri(corr, diag = FALSE)] <- r # set lower triangular matrix to be r
+corr[lower.tri(corr, diag = FALSE)] <- p # set lower triangular matrix to be p
 corr <- Matrix::forceSymmetric(corr, uplo="L")
 corr <- as.matrix(corr)
 corr <- as.data.frame(corr) # formatting
@@ -91,6 +93,7 @@ corr
 
 write_csv(summary, "~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/processed/summaryResults.csv")
 write_csv(corr, "~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/processed/corrMatrix.csv")
+write_csv(corr, "~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/processed/corrMatrix_pVals.csv")
 
 
 #-------------------------------------------------
@@ -121,21 +124,38 @@ levels(dist_dat$var) <- c(
 )
 
 
-fixed <- ggplot(dist_dat) +
+fixed_10 <- ggplot(dist_dat) +
+  facet_wrap(. ~ var, scales = "fixed", nrow = 3) +
+  geom_histogram(aes(estimate), bins = 10) +
+  ylab("Frequency") +
+  xlab("Variation in Biodiversity Recovery") +
+  theme_bw()
+
+fixed_25 <- ggplot(dist_dat) +
+  facet_wrap(. ~ var, scales = "fixed", nrow = 3) +
+  geom_histogram(aes(estimate), bins = 25) +
+  ylab("Frequency") +
+  xlab("Variation in Biodiversity Recovery") +
+  theme_bw()
+
+fixed_50 <- ggplot(dist_dat) +
   facet_wrap(. ~ var, scales = "fixed", nrow = 3) +
   geom_histogram(aes(estimate), bins = 50) +
   ylab("Frequency") +
-  xlab("ln(Response Ratio)") +
+  xlab("Variation in Biodiversity Recovery") +
   theme_bw()
+
 
 free <- ggplot(dist_dat) +
   facet_wrap(. ~ var, scales = "free", nrow = 3) +
   geom_histogram(aes(estimate), bins = 50) +
   ylab("Frequency") +
-  xlab("ln(Response Ratio)") +
+  xlab("Variation in Biodiversity Recovery") +
   theme_bw()
 
-ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/fixed_scales.jpg", fixed, device = "jpeg", width = 6, height = 8, units = "in")
+ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/fixed10_scales.jpg", fixed_10, device = "jpeg", width = 6, height = 8, units = "in")
+ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/fixed25_scales.jpg", fixed_25, device = "jpeg", width = 6, height = 8, units = "in")
+ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/fixed50_scales.jpg", fixed_50, device = "jpeg", width = 6, height = 8, units = "in")
 ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/free_scales.jpg", free, device = "jpeg", width = 6, height = 8, units = "in")
 
 #------------------------------------------------------------------
@@ -198,7 +218,7 @@ shp <- read_sf("~/Desktop/corr_data/shapefiles/fa_pts_distribution.shp") %>%
          lat = st_coordinates(.)[, 2]) %>%
   select(fa, long, lat) %>%
   sample_n(100)
-
+  
 azimuth_eqdst <- " +proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m no_defs"
 az_eq <- CRS("+proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs")
 
