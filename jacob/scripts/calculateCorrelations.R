@@ -32,6 +32,8 @@ library(tidyverse)
 
 dir <- "~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/csv/"
 
+corrType = "spearman"
+
 files <- list.files(dir)
 
 summary = data.frame(
@@ -50,7 +52,7 @@ for(file in files) {
     as.data.frame() %>%
     sample_n(1000)   # Randomly sample 1000 pts
   
-  testResults <- cor.test(dat[, 1], dat[, 2], method = c("pearson"))
+  testResults <- cor.test(dat[, 1], dat[, 2], method = corrType)
   
   dat <- data.frame(
     pair = gsub('.csv', '', file),
@@ -70,30 +72,45 @@ sum_dat <- summary %>%
   separate(pair, sep = "_vs_", into = c("v1", "v2")) %>%
   select("v1", "v2", corr, p.val)
 
+# Build matrix for correlations
+
 var1 <- sum_dat$v1
 var2 <- sum_dat$v2
 r <- sum_dat$corr
-p <- sum_dat$p.val
 
-var <- unique(c(var1, var2))
+var <- unique(c(var1,var2))
 corr <- matrix(1, nrow=6, ncol=6, byrow = T) # a matrix with 1s
-#corr[lower.tri(corr, diag = FALSE)] <- r # set lower triangular matrix to be r
-corr[lower.tri(corr, diag = FALSE)] <- p # set lower triangular matrix to be p
+corr[lower.tri(corr,diag = FALSE)] <- r # lower triangular matrix to be r
 corr <- Matrix::forceSymmetric(corr, uplo="L")
 corr <- as.matrix(corr)
 corr <- as.data.frame(corr) # formatting
 row.names(corr) <- var # row names
 colnames(corr) <- var # column names
 
-corr
+# Build matrix for correlation p-values
+
+var1 <- sum_dat$v1
+var2 <- sum_dat$v2
+r <- sum_dat$p.val
+
+var <- unique(c(var1,var2))
+pval <- matrix(1, nrow=6, ncol=6, byrow = T) # a matrix with 1s
+pval[lower.tri(pval, diag = FALSE)] <- r # lower triangular matrix to be r
+pval <- Matrix::forceSymmetric(pval, uplo="L")
+pval <- as.matrix(pval)
+pval <- as.data.frame(pval) # formatting
+row.names(pval) <- var # row names
+colnames(pval) <- var # column names
+
+pval
 
 # Write out summary results to file.
 # summaryResults.csv = simple table of summary statistics
 # corrMatrix.csv = correlations between variables formatted as a correlation matrix.
 
-write_csv(summary, "~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/processed/summaryResults.csv")
-write_csv(corr, "~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/processed/corrMatrix.csv")
-write_csv(corr, "~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/processed/corrMatrix_pVals.csv")
+write_csv(summary, paste0("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/processed/summaryResults_", corrType, ".csv"))
+write_csv(corr, paste0("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/processed/corrMatrix_", corrType, ".csv"))
+write_csv(pval, paste0("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/processed/pvalMatrix_", corrType, ".csv"))
 
 
 #-------------------------------------------------
@@ -124,38 +141,21 @@ levels(dist_dat$var) <- c(
 )
 
 
-fixed_10 <- ggplot(dist_dat) +
-  facet_wrap(. ~ var, scales = "fixed", nrow = 3) +
-  geom_histogram(aes(estimate), bins = 10) +
-  ylab("Frequency") +
-  xlab("Variation in Biodiversity Recovery") +
-  theme_bw()
-
-fixed_25 <- ggplot(dist_dat) +
-  facet_wrap(. ~ var, scales = "fixed", nrow = 3) +
-  geom_histogram(aes(estimate), bins = 25) +
-  ylab("Frequency") +
-  xlab("Variation in Biodiversity Recovery") +
-  theme_bw()
-
-fixed_50 <- ggplot(dist_dat) +
+fixed <- ggplot(dist_dat) +
   facet_wrap(. ~ var, scales = "fixed", nrow = 3) +
   geom_histogram(aes(estimate), bins = 50) +
   ylab("Frequency") +
-  xlab("Variation in Biodiversity Recovery") +
+  xlab("ln(Response Ratio)") +
   theme_bw()
-
 
 free <- ggplot(dist_dat) +
   facet_wrap(. ~ var, scales = "free", nrow = 3) +
   geom_histogram(aes(estimate), bins = 50) +
   ylab("Frequency") +
-  xlab("Variation in Biodiversity Recovery") +
+  xlab("ln(Response Ratio)") +
   theme_bw()
 
-ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/fixed10_scales.jpg", fixed_10, device = "jpeg", width = 6, height = 8, units = "in")
-ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/fixed25_scales.jpg", fixed_25, device = "jpeg", width = 6, height = 8, units = "in")
-ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/fixed50_scales.jpg", fixed_50, device = "jpeg", width = 6, height = 8, units = "in")
+ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/fixed_scales.jpg", fixed, device = "jpeg", width = 6, height = 8, units = "in")
 ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/free_scales.jpg", free, device = "jpeg", width = 6, height = 8, units = "in")
 
 #------------------------------------------------------------------
@@ -164,6 +164,7 @@ ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/free_scales.jpg
 ## Autocorrelation tests & code ##
 ##################################
 
+#------------------------------------------------------------------
 # Examine how the significance changes with the number of points
 
 dat <- read_csv("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/csv/fa_vs_fr.csv")
@@ -206,38 +207,21 @@ ggplot(data = summary) +
 #-------------------------------------
 # Spatial autocorrelation
 
-library(ape)
-library(gstat)
 library(sf)
-library(spdep)
-library(tidyverse)
+library(ape)
 
 shp <- read_sf("~/Desktop/corr_data/shapefiles/fa_pts_distribution.shp") %>%
   rename(fa = first) %>%
   mutate(long = st_coordinates(.)[, 1],
          lat = st_coordinates(.)[, 2]) %>%
   select(fa, long, lat) %>%
-  sample_n(100)
-  
-azimuth_eqdst <- " +proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m no_defs"
-az_eq <- CRS("+proj=aeqd +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs")
+  sample_n(40)
 
-shp <- st_transform(shp, az_eq)
+shp_df <- st_set_geometry(shp, NULL)
 
+shp.dists <- as.matrix(dist(cbind(shp_df$long, shp_df$lat)))
 
-shp_knn <- knearneigh(shp, k = 1)  # Only 1 nearest neighbor, can alter later
-shp_nb <- knn2nb(shp_knn)
-w <- nb2listw(shp_nb)
+shp.dists.inv <- 1/shp.dists
+diag(shp.dists.inv) <- 0
 
-moran(shp$fa, w, n=length(w$neighbours), S0=Szero(w))
-moran.test(shp$fa, w, randomisation=FALSE)
-
-moran.mc(shp$fa, w, nsim=99)
-
-# Compute semivariance and visualize
-
-gs <- gstat(formula = fa~1, data = shp)
-v <- variogram(gs, width = 20)
-
-head(v)
-plot(v)
+Moran.I(shp_df$fa, shp.dists.inv)
