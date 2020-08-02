@@ -116,7 +116,14 @@ write_csv(pval, paste0("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data
 #-------------------------------------------------
 # Build a histogram plot using shapefiles of 5,000 pts
 
+
+library(ggthemes)
+library(ggpubr)
+library(gtable)
+library(grid)
+library(gridExtra)
 library(sf)
+library(tidyverse)
 
 indir <- "~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/data/shp/"
 
@@ -133,30 +140,135 @@ dist_dat <- bind_cols(fa, fr, ia, ir, va, vr) %>%
 
 levels(dist_dat$var) <- c(
   "Flora Abundance",
-  "Flora Richeness",
+  "Flora Richness",
   "Invertebrate Abundance",
   "Invertebrate Richness",
   "Vertebrate Abundance",
   "Vertebrate Richness"
 )
 
+dist_dat2 <- dist_dat %>%
+  separate(var, into = c("taxa", "metric")) %>%
+  mutate(metric_alpha = ifelse(metric == "Abundance", 0.2, 0.1),
+         metric = ifelse(metric == "Abundance", "Species Abundance", "Species Richness")) %>%
+  group_by(taxa, metric) %>%
+  mutate(avg_est = mean(estimate),
+         med_est = median(estimate))
 
-fixed <- ggplot(dist_dat) +
-  facet_wrap(. ~ var, scales = "fixed", nrow = 3) +
-  geom_histogram(aes(estimate), bins = 50) +
+dat_text <- data.frame(
+  label = c("A"),
+  metric = c("Abundance")
+)
+
+legPlot <- dist_dat2 %>%
+  ggplot() +
+  geom_histogram(aes(estimate, col = taxa), fill = "white", alpha = 1) +
+  scale_color_manual(values = c("#009E73", "#D55E00", "#0072B2"),
+                     breaks = c("Flora", "Vertebrate", "Invertebrate"),
+                     labels = c("Plants", "Vertebrates", "Invertebrates")) +
+  theme_bw() +
+  theme(legend.title = element_blank(),
+        legend.position = "bottom",
+        legend.text = element_text(family = "serif", size = 10))
+
+leg <- get_legend(legPlot)
+
+flora_text <- dist_dat2 %>%
+  select(taxa, metric, med_est) %>%
+  distinct() %>%
+  mutate(metric = factor(metric, levels = c("Species Abundance", "Species Richness")),
+         x =  med_est + 0.6, y = 2000,
+         lab = round(med_est, 2))
+
+
+flora <- dist_dat2 %>%
+  filter(taxa == "Flora") %>%
+  ggplot() +
+  facet_wrap(. ~ metric, scales = "fixed", ncol = 2) +
+  geom_histogram(aes(estimate), fill = NA, col = "#009E73", bins = 10) +
+  scale_x_continuous(limits = c(0, 3)) +
+  geom_vline(aes(xintercept = med_est), col = "#009E73", linetype = "dashed") +
+  #annotate("text", x = 1, y = 2000, label = "poots") +
+  geom_text(data = filter(flora_text, taxa == "Flora"), 
+            aes(x = x -0.05, y = y, label = lab), family = "serif") +
   ylab("Frequency") +
-  xlab("ln(Response Ratio)") +
-  theme_bw()
+  xlab("Deviation in Biodiversity Recovery") +
+  theme_bw() +
+  theme(legend.position = "none",
+        strip.background = element_blank(),
+        strip.text = element_text(family = "serif", size = 12),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.x = element_blank(),
+        plot.title = element_text(size = 10),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.major.x = element_blank())
 
-free <- ggplot(dist_dat) +
-  facet_wrap(. ~ var, scales = "free", nrow = 3) +
-  geom_histogram(aes(estimate), bins = 50) +
+verts <- dist_dat2 %>%
+  filter(taxa == "Vertebrate") %>%
+  ggplot() +
+  facet_wrap(. ~ metric, scales = "fixed", ncol = 2) +
+  geom_histogram(aes(estimate), col="#D55E00", fill = NA, bins = 10) +
+  #scale_y_continuous(limits = c(0, 1000)) +
+  scale_x_continuous(limits = c(0, 3)) +
+  #geom_vline(aes(xintercept = avg_est), col = "orange", linetype = "solid") +
+  geom_vline(aes(xintercept = med_est), col = "#D55E00", linetype = "dashed") +
+  geom_text(data = filter(flora_text, taxa == "Vertebrate"), 
+            aes(x = x + 0.05, y = 1800, label = lab), family = "serif") +
+  #ggtitle("Vertebrates") +
   ylab("Frequency") +
-  xlab("ln(Response Ratio)") +
-  theme_bw()
+  xlab("Deviation in Biodiversity Recovery") +
+  theme_bw() +
+  theme(legend.position = "none",
+        strip.background = element_blank(), 
+        strip.text = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.x = element_blank(),
+        plot.title = element_text(size = 10),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.major.x = element_blank())
 
-ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/fixed_scales.jpg", fixed, device = "jpeg", width = 6, height = 8, units = "in")
-ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/free_scales.jpg", free, device = "jpeg", width = 6, height = 8, units = "in")
+inverts <- dist_dat2 %>%
+  filter(taxa == "Invertebrate") %>%
+  ggplot() +
+  facet_wrap(. ~ metric, scales = "fixed", ncol = 2) +
+  geom_histogram(aes(estimate), fill = "NA", col= "#0072B2", bins = 10) +
+  scale_x_continuous(limits = c(0, 3)) +
+  geom_vline(aes(xintercept = med_est), col = "#0072B2", linetype = "dashed") +
+  geom_text(data = filter(flora_text, taxa == "Invertebrate"), 
+            aes(x = x - 0.15, y = 2500, label = lab), family = "serif") +
+  ylab("Frequency") +
+  xlab("Deviation in Biodiversity Recovery") +
+  theme_bw() +
+  #annotation_custom(grob = leg, xmin = 1.5, xmax=3, ymin = 500, ymax = 2500) +
+  theme(legend.position = "bottom",
+        strip.background = element_blank(), 
+        strip.text = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        plot.title = element_text(size = 12),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_blank(),
+        panel.grid.major.x = element_blank())
+
+
+wo_leg <- grid.arrange(flora, verts, inverts,
+             nrow = 3,
+             left = textGrob("Frequency", rot = 90, vjust = 1, gp = gpar(fontfamily = "serif", fontsize = 12)),
+             bottom = textGrob("Deviation in Biodiversity Recovery", gp = gpar(fontfamily = "serif", fontsize = 12)))
+
+w_leg <- grid.arrange(wo_leg, leg, 
+                      nrow = 2, heights = c(10, 1))
+
+
+ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/fig3_draft4.jpg", w_leg, device = "jpeg", width = 4.5, height = 6, units = "in")
+
 
 #------------------------------------------------------------------
 
