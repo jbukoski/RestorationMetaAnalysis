@@ -185,12 +185,12 @@ flora <- dist_dat2 %>%
   filter(taxa == "Flora") %>%
   ggplot() +
   facet_wrap(. ~ metric, scales = "fixed", ncol = 2) +
-  geom_histogram(aes(estimate), fill = NA, col = "#009E73", bins = 10) +
-  scale_x_continuous(limits = c(0, 3)) +
+  geom_histogram(aes(estimate), fill = NA, col = "#009E73", bins = 12) +
+  scale_x_continuous(limits = c(-0.25, 3.5)) +
   geom_vline(aes(xintercept = med_est), col = "#009E73", linetype = "dashed") +
   #annotate("text", x = 1, y = 2000, label = "poots") +
   geom_text(data = filter(flora_text, taxa == "Flora"), 
-            aes(x = x -0.05, y = y, label = lab), family = "serif") +
+            aes(x = x, y = y, label = lab), family = "serif") +
   ylab("Frequency") +
   xlab("Deviation in Biodiversity Recovery") +
   theme_bw() +
@@ -210,13 +210,13 @@ verts <- dist_dat2 %>%
   filter(taxa == "Vertebrate") %>%
   ggplot() +
   facet_wrap(. ~ metric, scales = "fixed", ncol = 2) +
-  geom_histogram(aes(estimate), col="#D55E00", fill = NA, bins = 10) +
+  geom_histogram(aes(estimate), col="#D55E00", fill = NA, bins = 12) +
   #scale_y_continuous(limits = c(0, 1000)) +
-  scale_x_continuous(limits = c(0, 3)) +
+  scale_x_continuous(limits = c(-0.25, 3.5)) +
   #geom_vline(aes(xintercept = avg_est), col = "orange", linetype = "solid") +
   geom_vline(aes(xintercept = med_est), col = "#D55E00", linetype = "dashed") +
   geom_text(data = filter(flora_text, taxa == "Vertebrate"), 
-            aes(x = x + 0.05, y = 1800, label = lab), family = "serif") +
+            aes(x = x + 0.1, y = 1800, label = lab), family = "serif") +
   #ggtitle("Vertebrates") +
   ylab("Frequency") +
   xlab("Deviation in Biodiversity Recovery") +
@@ -237,8 +237,8 @@ inverts <- dist_dat2 %>%
   filter(taxa == "Invertebrate") %>%
   ggplot() +
   facet_wrap(. ~ metric, scales = "fixed", ncol = 2) +
-  geom_histogram(aes(estimate), fill = "NA", col= "#0072B2", bins = 10) +
-  scale_x_continuous(limits = c(0, 3)) +
+  geom_histogram(aes(estimate), fill = "NA", col= "#0072B2", bins = 12) +
+  scale_x_continuous(limits = c(-0.25, 3.5)) +
   geom_vline(aes(xintercept = med_est), col = "#0072B2", linetype = "dashed") +
   geom_text(data = filter(flora_text, taxa == "Invertebrate"), 
             aes(x = x - 0.15, y = 2500, label = lab), family = "serif") +
@@ -267,7 +267,7 @@ w_leg <- grid.arrange(wo_leg, leg,
                       nrow = 2, heights = c(10, 1))
 
 
-ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/fig3_draft4.jpg", w_leg, device = "jpeg", width = 4.5, height = 6, units = "in")
+ggsave("~/Dropbox/manuscripts/RestorationMetaAnalysis/jacob/figs/fig3_draft5.jpg", w_leg, device = "jpeg", width = 4.5, height = 6, units = "in")
 
 
 #------------------------------------------------------------------
